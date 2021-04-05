@@ -21,3 +21,5 @@ else
 	echo "Installing DnsMasq..."
 	apt install -y dnsmasq
 fi	
+
+echo"The end"
