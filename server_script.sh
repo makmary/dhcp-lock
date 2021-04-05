@@ -22,4 +22,12 @@ else
 	apt install -y dnsmasq
 fi	
 
+read -p 'Interface: ' interfacevar
+read -p 'Dhcp-range: ' dhcprangevar
+read -p 'IP address for server' serveripvar
+
+ifconfig $interfacevar $serveripvar
+ifconfig $interfacevar up
+systemstl start dnsmasq.service
+
 echo"The end"
