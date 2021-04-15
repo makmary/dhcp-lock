@@ -1,8 +1,8 @@
 #!/bin/bash
 echo "		Settings for server"
 
-if ! [ $(id -u) = 0 ]; then 
-	echo "This script must be run as root"
+if [ "$(id -u)" != 0 ]; then 
+	echo "This script must be run as root" >&2
 	exit 1
 else
 	#Update and Upgrade
@@ -20,6 +20,19 @@ else
 	#Install Dnsmasq
 	echo "Installing DnsMasq..."
 	apt install -y dnsmasq
+	
+	apt install software-properties-common
+	add-apt-repository ppa:deadsnakes/ppa
+	apt update
+	
+	apt install python3.8
+	python3 ––version
+	
+	apt install python3-pip
+	pip3 --version
+	
+	pip3 install scapy
+	sudo apt-get install python3-scapy
 fi	
 
 read -p 'Interface: ' interfacevar
