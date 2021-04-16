@@ -1,7 +1,1 @@
-04-16 03:21 root         INFO     [*] Waiting for a DHCP Packets...
-04-16 03:21 root         INFO     [*] Got new DHCP REQUEST from: 08:00:27:82:bd:6e xid: 0xbcdc73ef
-04-16 03:21 root         INFO     Host ubuntu-VirtualBox (08:00:27:82:bd:6e) requested None
-04-16 03:21 root         INFO     None
-04-16 03:22 root         INFO     [*] Got new DHCP REQUEST from: 08:00:27:88:49:89 xid: 0xba333317
-04-16 03:22 root         INFO     Host ubuntu-VirtualBox (08:00:27:88:49:89) requested 192.168.56.110
-04-16 03:22 root         INFO     None
+04-16 03:41 root         INFO     [*] Waiting for a DHCP Packets...

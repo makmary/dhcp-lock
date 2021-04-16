@@ -2,6 +2,13 @@
 
 from scapy.all import *
 import logging
+import argparse
+
+#BOOTP
+#siaddr = DHCP server ip
+#yiaddr = ip offered to client
+#xid = transaction id 
+#chaddr = clients mac address in binary format
 
 # Fixup function to extract dhcp_options by key
 def get_option(dhcp_options, key):
@@ -62,12 +69,19 @@ def dhcp(resp):
 
 
 def main():
+	# logger
 	logging.basicConfig(filename='myapp.log', filemode='w', level=logging.INFO, format='%(asctime)s %(name)-12s %(levelname)-8s %(message)s', datefmt='%m-%d %H:%M')
 	console = logging.StreamHandler()
 	console.setLevel(logging.INFO)
 	formatter = logging.Formatter('%(name)-12s: %(levelname)-8s %(message)s')
 	console.setFormatter(formatter)
 	logging.getLogger().addHandler(console)
+	#args_parser
+	parser = argparse.ArgumentParser(description='DHCPLock', epilog='Lock dem baby!')
+	parser.add_argument('-n', '--quantity', type=str, help='The number of trusted DHCP servers')
+	parser.add_argument('-s', '--servers', type=str, help='Trusted DHCP servers` IP addresses')
+	args = parser.parse_args()
+	# settings for interface and dhcplock_filter
 	interface = 'enp0s8'
 	dhcplock_filter = 'udp and (port 67 or 68)'
 	logging.info("[*] Waiting for a DHCP Packets...")
