@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 from scapy.all import *
+import logging
 
 # Fixup function to extract dhcp_options by key
 def get_option(dhcp_options, key):
@@ -28,37 +29,50 @@ def dhcp(resp):
 
 		if resp[DHCP].options[0][1] == 1:
 			xid = resp[BOOTP].xid
-			print("[*] Got new DHCP DISCOVER from: " + mac_addr + " xid: " + hex(xid))
+			logging.info("[*] Got new DHCP DISCOVER from: " + mac_addr + " xid: " + hex(xid))
 			hostname = get_option(resp[DHCP].options, 'hostname')
-			print(f"Host {hostname} ({resp[Ether].src}) asked for an IP")
+			logging.info(f"Host {hostname} ({resp[Ether].src}) asked for an IP")
+			logging.info(resp.show())
 
 		if resp[DHCP].options[0][1] == 2:
 			xid = resp[BOOTP].xid
-			print("[*] Got new DHCP OFFER from: " + mac_addr + " xid: " + hex(xid))
-			subnet_mask = get_option(packet[DHCP].options, 'subnet_mask')
-			lease_time = get_option(packet[DHCP].options, 'lease_time')
-			router = get_option(packet[DHCP].options, 'router')
-			name_server = get_option(packet[DHCP].options, 'name_server')
-			domain = get_option(packet[DHCP].options, 'domain')
+			logging.info("[*] Got new DHCP OFFER from: " + mac_addr + " xid: " + hex(xid))
+			subnet_mask = get_option(resp[DHCP].options, 'subnet_mask')
+			lease_time = get_option(resp[DHCP].options, 'lease_time')
+			router = get_option(resp[DHCP].options, 'router')
+			name_server = get_option(resp[DHCP].options, 'name_server')
+			domain = get_option(resp[DHCP].options, 'domain')
 
 
-			print(f"DHCP Server {packet[IP].src} ({packet[Ether].src}) "
-			      f"offered {packet[BOOTP].yiaddr}")
+			logging.info(f"DHCP Server {resp[IP].src} ({resp[Ether].src}) "
+			      f"offered {resp[BOOTP].yiaddr}")
 
 
-			print(f"DHCP Options: subnet_mask: {subnet_mask}, lease_time: "
+			logging.info(f"DHCP Options: subnet_mask: {subnet_mask}, lease_time: "
 			      f"{lease_time}, router: {router}, name_server: {name_server}, "
 			      f"domain: {domain}")
 
 		if resp[DHCP].options[0][1] == 3:
 			xid = resp[BOOTP].xid
-			print("[*] Got new DHCP REQUEST from: " + mac_addr + " xid: " + hex(xid))
+			logging.info("[*] Got new DHCP REQUEST from: " + mac_addr + " xid: " + hex(xid))
 			requested_addr = get_option(resp[DHCP].options, 'requested_addr')
 			hostname = get_option(resp[DHCP].options, 'hostname')
-			print(f"Host {hostname} ({resp[Ether].src}) requested {requested_addr}")
+			logging.info(f"Host {hostname} ({resp[Ether].src}) requested {requested_addr}")
+			logging.info(resp.show())
 
 
-interface = 'enp0s8'
-dhcplock_filter = 'udp and (port 67 or 68)'
-print("[*] Waiting for a DHCP Packets...")
-sniff(iface=interface, filter=dhcplock_filter, prn=dhcp)
+def main():
+	logging.basicConfig(filename='myapp.log', filemode='w', level=logging.INFO, format='%(asctime)s %(name)-12s %(levelname)-8s %(message)s', datefmt='%m-%d %H:%M')
+	console = logging.StreamHandler()
+	console.setLevel(logging.INFO)
+	formatter = logging.Formatter('%(name)-12s: %(levelname)-8s %(message)s')
+	console.setFormatter(formatter)
+	logging.getLogger().addHandler(console)
+	interface = 'enp0s8'
+	dhcplock_filter = 'udp and (port 67 or 68)'
+	logging.info("[*] Waiting for a DHCP Packets...")
+	sniff(iface=interface, filter=dhcplock_filter, prn=dhcp)
+
+
+if __name__ == '__main__':
+	main()
