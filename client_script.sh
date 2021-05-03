@@ -57,4 +57,7 @@ then
 	sudo dhclient $interfacevar 
 fi
 
+echo "All network interfaces:"
+ifconfig -a
+
 echo"		The end"

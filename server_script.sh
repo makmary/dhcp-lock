@@ -69,4 +69,7 @@ then
 	systemstl start dnsmasq.service
 fi
 
+echo "All network interfaces:"
+ifconfig -a
+
 echo"		The end"
