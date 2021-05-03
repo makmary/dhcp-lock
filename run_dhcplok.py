@@ -84,6 +84,25 @@ def dhcp(resp):
 			hostname = get_option(resp[DHCP].options, 'hostname')
 			logging.info(f"Host {hostname} ({resp[Ether].src}) requested {requested_addr}")
 			logging.info(resp.show())
+			
+			
+		# ---- DHCP ACK ----
+		if resp[DHCP].options[0][1] == 5:
+			xid = resp[BOOTP].xid
+			logging.info("[*] Got new DHCP ACKNOLEDGMENT from: " + mac_addr + " xid: " + hex(xid))
+			subnet_mask = get_option(resp[DHCP].options, 'subnet_mask')
+			lease_time = get_option(resp[DHCP].options, 'lease_time')
+			router = get_option(resp[DHCP].options, 'router')
+			name_server = get_option(resp[DHCP].options, 'name_server')
+			domain = get_option(resp[DHCP].options, 'domain')
+
+
+			logging.info(f"DHCP Server {resp[IP].src} ({resp[Ether].src}) "
+			      f"offered {resp[BOOTP].yiaddr}")
+
+			logging.info(f"DHCP Options: subnet_mask: {subnet_mask}, lease_time: "
+			      f"{lease_time}, router: {router}, name_server: {name_server}, "
+			      f"domain: {domain}")	
 
 
 def main():
@@ -96,12 +115,12 @@ def main():
 	logging.getLogger().addHandler(console)
 	#args_parser
 	parser = argparse.ArgumentParser(description='DHCPLock', epilog='Lock dem baby!')
-	parser.add_argument('-i', '--iface', type=str, required=True, help='Interface to use')
+	parser.add_argument('-i', '--iface', type=str, help='Interface to use')
 	parser.add_argument('-n', '--quantity', type=str, help='The number of trusted DHCP servers')
 	parser.add_argument('-s', '--servers', type=str, help='Trusted DHCP servers` IP addresses')
 	args = parser.parse_args()
 	# settings for interface and dhcplock_filter
-	interface = args.iface
+	interface = 'enp0s9'
 	dhcplock_filter = 'udp and (port 67 or 68)'
 	logging.info("[*] Waiting for a DHCP Packets...")
 	sniff(iface=interface, filter=dhcplock_filter, prn=dhcp)
