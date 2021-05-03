@@ -1,7 +1,7 @@
 #!/bin/bash
-echo "		Settings for DHCPLOK server"
+echo "		Settings for DHCPLOK client"
 
-echo "Do you want to install all required packages for dhcplok?(yes/no)"
+echo "Do you want to install all required packages for dhcplok client?(yes/no)"
 read input
 if [ "$input" == "yes" ]
 then
@@ -49,24 +49,12 @@ fi
 echo "All network interfaces:"
 ifconfig -a
 
-echo "Do you want to open dnsmasq.conf?(yes/no)"
+echo "Do you want to get IP address from DHCP server?(yes/no)"
 read input
 if [ "$input" == "yes" ]
 then
-	sudo nano /etc/dnsmasq.conf
-fi
-
-echo "Do you want to set IP address for certain interface?(yes/no)"
-read input
-if [ "$input" == "yes" ]
-then
-	read -p 'Interface for DHCP server: ' interfacevar
-	read -p 'IP address for DHCP server' serveripvar
-
-	sudo ifconfig $interfacevar $serveripvar
-	sudo ifconfig $interfacevar up
-	echo "Starting daemon..."
-	systemstl start dnsmasq.service
+	read -p 'Interface for DHCP client: ' interfacevar
+	sudo dhclient $interfacevar 
 fi
 
 echo"		The end"
