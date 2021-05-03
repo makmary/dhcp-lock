@@ -2,7 +2,7 @@
 
 from scapy.all import *
 import logging
-import argparse
+from args_parser import parse_args
 
 #BOOTP
 #siaddr = DHCP server ip
@@ -70,26 +70,24 @@ def dhcp(resp):
 		
 		# ---- DHCP DISCOVER ----
 		if resp[DHCP].options[0][1] == DHCPTypes.get('discover'):
-			logging.info("[*] Got new DHCP DISCOVER from: " + mac_addr + " xid: " + hex(xid))
 			hostname = get_option(resp[DHCP].options, 'hostname')
-			logging.info(f"Host {hostname} ({resp[Ether].src}) asked for an IP")
+			server_id = resp[DHCP].options[1][1]
+			
+			logging.info(f"[*] Got new DHCP DISCOVER of {ciaddr} ({mac_addr}) xid: {hex(xid)}")
+			logging.info(f"Host {hostname} with IP {ciaddr}({mac_addr}) asked {server_id} for an IP")
 			#logging.info(resp.show())
 
 		# ---- DHCP OFFER ----
 		elif resp[DHCP].options[1][1] == DHCPTypes.get('offer'):
-			logging.info("[*] Got new DHCP OFFER from: " + mac_addr + " xid: " + hex(xid))
+			logging.info(f"[*] Got new DHCP OFFER of {ciaddr} ({mac_addr}) xid: {hex(xid)}")
 			subnet_mask = get_option(resp[DHCP].options, 'subnet_mask')
 			lease_time = get_option(resp[DHCP].options, 'lease_time')
 			router = get_option(resp[DHCP].options, 'router')
 			name_server = get_option(resp[DHCP].options, 'name_server')
 			domain = get_option(resp[DHCP].options, 'domain')
 
-			logging.info(f"DHCP Server {resp[IP].src} ({resp[Ether].src}) "
-			      f"offered {resp[BOOTP].yiaddr}")
-
-			logging.info(f"DHCP Options: subnet_mask: {subnet_mask}, lease_time: "
-			      f"{lease_time}, router: {router}, name_server: {name_server}, "
-			      f"domain: {domain}")
+			logging.info(f"DHCP Server {resp[IP].src} ({mac_addr}) offered {resp[BOOTP].yiaddr}")
+			logging.info(f"DHCP Options: subnet_mask: {subnet_mask}, lease_time: {lease_time}, router: {router}, name_server: {name_server}, domain: {domain}")
 
 		# ---- DHCP REQUEST ----
 		elif resp[DHCP].options[0][1] == DHCPTypes.get('request'):
@@ -97,7 +95,6 @@ def dhcp(resp):
 			requested_addr = get_option(resp[DHCP].options, 'requested_addr')
 			hostname = get_option(resp[DHCP].options, 'hostname')
 			logging.info(f"Host {hostname} ({resp[Ether].src}) requested {requested_addr}")
-			#logging.info(resp.show())
 			
 			
 		# ---- DHCP ACK ----
@@ -110,12 +107,9 @@ def dhcp(resp):
 			domain = get_option(resp[DHCP].options, 'domain')
 
 
-			logging.info(f"DHCP Server {resp[IP].src} ({resp[Ether].src}) "
-			      f"offered {resp[BOOTP].yiaddr}")
+			logging.info(f"DHCP Server {resp[IP].src} ({resp[Ether].src}) offered {resp[BOOTP].yiaddr}")
 
-			logging.info(f"DHCP Options: subnet_mask: {subnet_mask}, lease_time: "
-			      f"{lease_time}, router: {router}, name_server: {name_server}, "
-			      f"domain: {domain}")
+			logging.info(f"DHCP Options: subnet_mask: {subnet_mask}, lease_time: {lease_time}, router: {router}, name_server: {name_server}, domain: {domain}")
 			  
 		# ---- DHCP RELEASE ----
 		elif resp[DHCP].options[0][1] == DHCPTypes.get('release'):
@@ -132,26 +126,37 @@ def dhcp(resp):
 			print(resp.show())
 
 
-def main():
-	# logger
-	logging.basicConfig(filename='myapp.log', filemode='w', level=logging.INFO, format='%(asctime)s %(name)-12s %(levelname)-8s %(message)s', datefmt='%m-%d %H:%M')
+def set_logger():
+	logging.basicConfig(filename='myapp.log', filemode='w', level=logging.INFO, format='%(asctime)s %(levelname)-8s %(message)s', datefmt='%m-%d %H:%M')
 	console = logging.StreamHandler()
 	console.setLevel(logging.INFO)
 	formatter = logging.Formatter('%(name)-12s: %(levelname)-8s %(message)s')
 	console.setFormatter(formatter)
 	logging.getLogger().addHandler(console)
-	#args_parser
-	parser = argparse.ArgumentParser(description='DHCPLock', epilog='Lock dem baby!')
-	parser.add_argument('-i', '--iface', type=str, help='Interface to use')
-	parser.add_argument('-n', '--quantity', type=str, help='The number of trusted DHCP servers')
-	parser.add_argument('-s', '--servers', type=str, help='Trusted DHCP servers` IP addresses')
-	args = parser.parse_args()
-	# settings for interface and dhcplock_filter
-	interface = 'enp0s9'
-	dhcplock_filter = 'port 67 or port 68'
-	logging.info("[*] Waiting for a DHCP Packets...")
-	sniff(iface=interface, filter=dhcplock_filter, prn=dhcp)
+	
+	
+def get_settings_from_file(filename:str):
+	#TODO: create validator for correct input file 
+	f = open(filename, 'r')
+	data = json.loads(f.read())
+	print("JSON string": data)
+	f.close()
+	return None
 
+
+def main():
+	set_logger()
+	args = parse_args() #argument parser
+	dhcplock_filter = 'udp and (port 67 or port 68)'
+	if args.file:
+		interface = get_settings_from_file(args.file)
+		logging.info("[*] Waiting for a DHCP Packets...")
+		sniff(iface=interface, filter=dhcplock_filter, prn=dhcp)
+	else:	
+		interface = 'enp0s9'
+		logging.info("[*] Waiting for a DHCP Packets...")
+		sniff(iface=interface, filter=dhcplock_filter, prn=dhcp)
+	
 
 if __name__ == '__main__':
 	main()

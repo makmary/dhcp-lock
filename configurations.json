@@ -1,0 +1,16 @@
+{
+	"configDetails": {
+		"interfaces": "enp0s9",
+		"trustedServersNumber": 1,
+		"servers":[
+		{
+			"serverID": 0,
+			"serverIP": "192.168.94.2",
+			"emailCount": 1,
+			"emailSender": "makmary05@gmail.com",
+			"emailReceiver": "makmary05@gmail.com",
+			"emailPassword": "masha123",
+			"mailOn": true,
+		}]
+	}
+}
