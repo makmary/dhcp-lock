@@ -8,10 +8,20 @@ Dhcp server and client with scapy and python
 ```
 main.py  [--iface network interface] [--file filename] 
 
-Options:
+DHCPLock
+
+optional arguments:
   -h, --help         show this help message and exit
-  --iface=IFACE      Interface to use.
-  --file=FILE        File with configurations
+
+File settings:
+  -f FILE, --file FILE       
+                     File with DHCP server settings
+  
+User settings:
+  -i FACE, --iface FACE
+                     Interface to use
+                     
+Lock dem baby!                     
 ```
 
 ## Requires
