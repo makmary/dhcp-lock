@@ -14,7 +14,7 @@ def main():
 		app = DHCPLock(filename=args.file)
 	else:	
 		app = DHCPLock(interfaces=args.iface)
-	app.run()
+	app.start()
 
 
 if __name__ == '__main__':

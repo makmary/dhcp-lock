@@ -4,8 +4,9 @@
 		"trustedServersNumber": 1,
 		"servers":[
 		{
-			"serverID": 0,
+			"serverID": 1,
 			"serverIP": "192.168.94.2",
+			"serverMAC": "08:00:27:94:cc:9b",
 			"emailCount": 1,
 			"emailSender": "makmary05@gmail.com",
 			"emailReceiver": "makmary05@gmail.com",

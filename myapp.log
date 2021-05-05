@@ -1,26 +1,364 @@
-05-03 21:35 INFO     [*] Waiting for a DHCP Packets...
-05-03 21:36 INFO     [*] Got new DHCP REQUEST from: 08:00:27:2a:d9:5a xid: 0xa3a2e308
-05-03 21:36 INFO     Host ubuntu-VirtualBox (08:00:27:2a:d9:5a) requested None
-05-03 21:36 INFO     [*] Got new DHCP ACKNOLEDGMENT from: 08:00:27:b6:e2:c5 xid: 0xa3a2e308
-05-03 21:36 INFO     DHCP Server 192.168.94.2 (08:00:27:b6:e2:c5) offered 192.168.94.5
-05-03 21:36 INFO     DHCP Options: subnet_mask: 255.255.255.0, lease_time: 600, router: None, name_server: None, domain: None
-05-03 21:36 INFO     [*] Got new DHCP REQUEST from: 08:00:27:2a:d9:5a xid: 0xa12b1d69
-05-03 21:36 INFO     Host ubuntu-VirtualBox (08:00:27:2a:d9:5a) requested None
-05-03 21:36 INFO     [*] Got new DHCP ACKNOLEDGMENT from: 08:00:27:b6:e2:c5 xid: 0xa12b1d69
-05-03 21:36 INFO     DHCP Server 192.168.94.2 (08:00:27:b6:e2:c5) offered 192.168.94.5
-05-03 21:36 INFO     DHCP Options: subnet_mask: 255.255.255.0, lease_time: 600, router: None, name_server: None, domain: None
-05-03 21:36 INFO     [*] Got new DHCP REQUEST from: 08:00:27:2a:d9:5a xid: 0xcb9be3b
-05-03 21:36 INFO     Host ubuntu-VirtualBox (08:00:27:2a:d9:5a) requested None
-05-03 21:36 INFO     [*] Got new DHCP ACKNOLEDGMENT from: 08:00:27:b6:e2:c5 xid: 0xcb9be3b
-05-03 21:36 INFO     DHCP Server 192.168.94.2 (08:00:27:b6:e2:c5) offered 192.168.94.5
-05-03 21:36 INFO     DHCP Options: subnet_mask: 255.255.255.0, lease_time: 600, router: None, name_server: None, domain: None
-05-03 21:36 INFO     [*] Got new DHCP REQUEST from: 08:00:27:2a:d9:5a xid: 0xc4d84d60
-05-03 21:36 INFO     Host ubuntu-VirtualBox (08:00:27:2a:d9:5a) requested None
-05-03 21:36 INFO     [*] Got new DHCP ACKNOLEDGMENT from: 08:00:27:b6:e2:c5 xid: 0xc4d84d60
-05-03 21:36 INFO     DHCP Server 192.168.94.2 (08:00:27:b6:e2:c5) offered 192.168.94.5
-05-03 21:36 INFO     DHCP Options: subnet_mask: 255.255.255.0, lease_time: 600, router: None, name_server: None, domain: None
-05-03 21:36 INFO     [*] Got new DHCP REQUEST from: 08:00:27:94:cc:9b xid: 0xa974e20a
-05-03 21:36 INFO     Host ubuntu-VirtualBox (08:00:27:94:cc:9b) requested None
-05-03 21:36 INFO     [*] Got new DHCP ACKNOLEDGMENT from: 08:00:27:b6:e2:c5 xid: 0xa974e20a
-05-03 21:36 INFO     DHCP Server 192.168.94.2 (08:00:27:b6:e2:c5) offered 192.168.94.6
-05-03 21:36 INFO     DHCP Options: subnet_mask: 255.255.255.0, lease_time: 600, router: None, name_server: None, domain: None
+05-05 23:27 INFO     [*] Waiting for a DHCP Packets...
+05-05 23:27 INFO     [*] Got new DHCP REQUEST from: 08:00:27:2a:d9:5a xid: 0x12cf7201
+05-05 23:27 INFO     Host ubuntu-VirtualBox (08:00:27:2a:d9:5a) requested 192.168.94.5
+05-05 23:27 INFO     [*] Got new DHCP ACKNOLEDGMENT from: 08:00:27:b6:e2:c5 xid: 0x12cf7201
+05-05 23:27 INFO     DHCP Server 192.168.94.2 (08:00:27:b6:e2:c5) offered 192.168.94.5
+05-05 23:27 INFO     DHCP Options: subnet_mask: 255.255.255.0, lease_time: 600, router: None, name_server: None, domain: None
+05-05 23:28 INFO     [*] Got new DHCP RELEASE of 192.168.94.5 08:00:27:2a:d9:5a xid: 0xdd2ea601
+05-05 23:28 INFO     Host ubuntu-VirtualBox with IP 192.168.94.5 (08:00:27:2a:d9:5a) released to 192.168.94.2
+05-05 23:28 INFO     [*] Got new DHCP DISCOVER of 0.0.0.0 (08:00:27:2a:d9:5a) xid: 0x29ff0159
+05-05 23:28 INFO     Host ubuntu-VirtualBox with IP 0.0.0.0(08:00:27:2a:d9:5a) asked 192.168.94.5 for an IP
+05-05 23:28 INFO     None
+05-05 23:28 INFO     [*] Got new DHCP OFFER of 0.0.0.0 (08:00:27:b6:e2:c5) xid: 0x29ff0159
+05-05 23:28 INFO     DHCP Server 192.168.94.2 (08:00:27:b6:e2:c5) offered 192.168.94.5
+05-05 23:28 INFO     DHCP Options: subnet_mask: 255.255.255.0, lease_time: 600, router: None, name_server: None, domain: None
+05-05 23:28 INFO     [*] Got new DHCP REQUEST from: 08:00:27:2a:d9:5a xid: 0x29ff0159
+05-05 23:28 INFO     Host ubuntu-VirtualBox (08:00:27:2a:d9:5a) requested 192.168.94.5
+05-05 23:28 INFO     [*] Got new DHCP ACKNOLEDGMENT from: 08:00:27:b6:e2:c5 xid: 0x29ff0159
+05-05 23:28 INFO     DHCP Server 192.168.94.2 (08:00:27:b6:e2:c5) offered 192.168.94.5
+05-05 23:28 INFO     DHCP Options: subnet_mask: 255.255.255.0, lease_time: 600, router: None, name_server: None, domain: None
+05-05 23:28 INFO     [*] Got new DHCP REQUEST from: 08:00:27:94:cc:9b xid: 0xfba29ea9
+05-05 23:28 INFO     Host ubuntu-VirtualBox (08:00:27:94:cc:9b) requested None
+05-05 23:28 INFO     [*] Got new DHCP ACKNOLEDGMENT from: 08:00:27:b6:e2:c5 xid: 0xfba29ea9
+05-05 23:28 INFO     DHCP Server 192.168.94.2 (08:00:27:b6:e2:c5) offered 192.168.94.6
+05-05 23:28 INFO     DHCP Options: subnet_mask: 255.255.255.0, lease_time: 600, router: None, name_server: None, domain: None
+05-05 23:30 INFO     [*] Got new DHCP REQUEST from: 08:00:27:2a:d9:5a xid: 0x482bc533
+05-05 23:30 INFO     Host ubuntu-VirtualBox (08:00:27:2a:d9:5a) requested None
+05-05 23:30 INFO     [*] Got new DHCP ACKNOLEDGMENT from: 08:00:27:b6:e2:c5 xid: 0x482bc533
+05-05 23:30 INFO     DHCP Server 192.168.94.2 (08:00:27:b6:e2:c5) offered 192.168.94.5
+05-05 23:30 INFO     DHCP Options: subnet_mask: 255.255.255.0, lease_time: 600, router: None, name_server: None, domain: None
+05-05 23:33 INFO     [*] Got new DHCP REQUEST from: 08:00:27:2a:d9:5a xid: 0xa4b2d2c0
+05-05 23:33 INFO     Host ubuntu-VirtualBox (08:00:27:2a:d9:5a) requested None
+05-05 23:33 INFO     [*] Got new DHCP ACKNOLEDGMENT from: 08:00:27:b6:e2:c5 xid: 0xa4b2d2c0
+05-05 23:33 INFO     DHCP Server 192.168.94.2 (08:00:27:b6:e2:c5) offered 192.168.94.7
+05-05 23:33 INFO     DHCP Options: subnet_mask: 255.255.255.0, lease_time: 600, router: None, name_server: None, domain: None
+05-05 23:33 INFO     [*] Got new DHCP REQUEST from: 08:00:27:2a:d9:5a xid: 0x29ff0159
+05-05 23:33 INFO     Host ubuntu-VirtualBox (08:00:27:2a:d9:5a) requested None
+05-05 23:33 INFO     [*] Got new DHCP ACKNOLEDGMENT from: 08:00:27:b6:e2:c5 xid: 0x29ff0159
+05-05 23:33 INFO     DHCP Server 192.168.94.2 (08:00:27:b6:e2:c5) offered 192.168.94.5
+05-05 23:33 INFO     DHCP Options: subnet_mask: 255.255.255.0, lease_time: 600, router: None, name_server: None, domain: None
+05-05 23:33 INFO     [*] Got new DHCP REQUEST from: 08:00:27:94:cc:9b xid: 0x675f8c26
+05-05 23:33 INFO     Host ubuntu-VirtualBox (08:00:27:94:cc:9b) requested None
+05-05 23:33 INFO     [*] Got new DHCP ACKNOLEDGMENT from: 08:00:27:b6:e2:c5 xid: 0x675f8c26
+05-05 23:33 INFO     DHCP Server 192.168.94.2 (08:00:27:b6:e2:c5) offered 192.168.94.6
+05-05 23:33 INFO     DHCP Options: subnet_mask: 255.255.255.0, lease_time: 600, router: None, name_server: None, domain: None
+05-05 23:34 INFO     [*] Got new DHCP REQUEST from: 08:00:27:2a:d9:5a xid: 0x545d6cac
+05-05 23:34 INFO     Host ubuntu-VirtualBox (08:00:27:2a:d9:5a) requested 192.168.94.7
+05-05 23:34 INFO     [*] Got new DHCP ACKNOLEDGMENT from: 08:00:27:b6:e2:c5 xid: 0x545d6cac
+05-05 23:34 INFO     DHCP Server 192.168.94.2 (08:00:27:b6:e2:c5) offered 192.168.94.7
+05-05 23:34 INFO     DHCP Options: subnet_mask: 255.255.255.0, lease_time: 600, router: None, name_server: None, domain: None
+05-05 23:35 INFO     [*] Got new DHCP REQUEST from: 08:00:27:2a:d9:5a xid: 0x482bc533
+05-05 23:35 INFO     Host ubuntu-VirtualBox (08:00:27:2a:d9:5a) requested None
+05-05 23:35 INFO     [*] Got new DHCP ACKNOLEDGMENT from: 08:00:27:b6:e2:c5 xid: 0x482bc533
+05-05 23:35 INFO     DHCP Server 192.168.94.2 (08:00:27:b6:e2:c5) offered 192.168.94.5
+05-05 23:35 INFO     DHCP Options: subnet_mask: 255.255.255.0, lease_time: 600, router: None, name_server: None, domain: None
+05-05 23:37 INFO     [*] Got new DHCP REQUEST from: 08:00:27:2a:d9:5a xid: 0x29ff0159
+05-05 23:37 INFO     Host ubuntu-VirtualBox (08:00:27:2a:d9:5a) requested None
+05-05 23:37 INFO     [*] Got new DHCP ACKNOLEDGMENT from: 08:00:27:b6:e2:c5 xid: 0x29ff0159
+05-05 23:37 INFO     DHCP Server 192.168.94.2 (08:00:27:b6:e2:c5) offered 192.168.94.5
+05-05 23:37 INFO     DHCP Options: subnet_mask: 255.255.255.0, lease_time: 600, router: None, name_server: None, domain: None
+05-05 23:38 INFO     [*] Got new DHCP REQUEST from: 08:00:27:94:cc:9b xid: 0xb6515463
+05-05 23:38 INFO     Host ubuntu-VirtualBox (08:00:27:94:cc:9b) requested None
+05-05 23:38 INFO     [*] Got new DHCP ACKNOLEDGMENT from: 08:00:27:b6:e2:c5 xid: 0xb6515463
+05-05 23:38 INFO     DHCP Server 192.168.94.2 (08:00:27:b6:e2:c5) offered 192.168.94.6
+05-05 23:38 INFO     DHCP Options: subnet_mask: 255.255.255.0, lease_time: 600, router: None, name_server: None, domain: None
+05-05 23:39 INFO     [*] Got new DHCP REQUEST from: 08:00:27:2a:d9:5a xid: 0x465e3cc9
+05-05 23:39 INFO     Host ubuntu-VirtualBox (08:00:27:2a:d9:5a) requested None
+05-05 23:39 INFO     [*] Got new DHCP ACKNOLEDGMENT from: 08:00:27:b6:e2:c5 xid: 0x465e3cc9
+05-05 23:39 INFO     DHCP Server 192.168.94.2 (08:00:27:b6:e2:c5) offered 192.168.94.7
+05-05 23:39 INFO     DHCP Options: subnet_mask: 255.255.255.0, lease_time: 600, router: None, name_server: None, domain: None
+05-05 23:39 INFO     [*] Got new DHCP REQUEST from: 08:00:27:2a:d9:5a xid: 0x482bc533
+05-05 23:39 INFO     Host ubuntu-VirtualBox (08:00:27:2a:d9:5a) requested None
+05-05 23:39 INFO     [*] Got new DHCP ACKNOLEDGMENT from: 08:00:27:b6:e2:c5 xid: 0x482bc533
+05-05 23:39 INFO     DHCP Server 192.168.94.2 (08:00:27:b6:e2:c5) offered 192.168.94.5
+05-05 23:39 INFO     DHCP Options: subnet_mask: 255.255.255.0, lease_time: 600, router: None, name_server: None, domain: None
+05-05 23:41 INFO     [*] Got new DHCP REQUEST from: 08:00:27:2a:d9:5a xid: 0x29ff0159
+05-05 23:41 INFO     Host ubuntu-VirtualBox (08:00:27:2a:d9:5a) requested None
+05-05 23:41 INFO     [*] Got new DHCP ACKNOLEDGMENT from: 08:00:27:b6:e2:c5 xid: 0x29ff0159
+05-05 23:41 INFO     DHCP Server 192.168.94.2 (08:00:27:b6:e2:c5) offered 192.168.94.5
+05-05 23:41 INFO     DHCP Options: subnet_mask: 255.255.255.0, lease_time: 600, router: None, name_server: None, domain: None
+05-05 23:43 INFO     [*] Got new DHCP REQUEST from: 08:00:27:94:cc:9b xid: 0xc6e3caa3
+05-05 23:43 INFO     Host ubuntu-VirtualBox (08:00:27:94:cc:9b) requested None
+05-05 23:43 INFO     [*] Got new DHCP ACKNOLEDGMENT from: 08:00:27:b6:e2:c5 xid: 0xc6e3caa3
+05-05 23:43 INFO     DHCP Server 192.168.94.2 (08:00:27:b6:e2:c5) offered 192.168.94.6
+05-05 23:43 INFO     DHCP Options: subnet_mask: 255.255.255.0, lease_time: 600, router: None, name_server: None, domain: None
+05-05 23:44 INFO     [*] Got new DHCP REQUEST from: 08:00:27:2a:d9:5a xid: 0x482bc533
+05-05 23:44 INFO     Host ubuntu-VirtualBox (08:00:27:2a:d9:5a) requested None
+05-05 23:44 INFO     [*] Got new DHCP ACKNOLEDGMENT from: 08:00:27:b6:e2:c5 xid: 0x482bc533
+05-05 23:44 INFO     DHCP Server 192.168.94.2 (08:00:27:b6:e2:c5) offered 192.168.94.5
+05-05 23:44 INFO     DHCP Options: subnet_mask: 255.255.255.0, lease_time: 600, router: None, name_server: None, domain: None
+05-05 23:44 INFO     [*] Got new DHCP REQUEST from: 08:00:27:2a:d9:5a xid: 0xfead2b96
+05-05 23:44 INFO     Host ubuntu-VirtualBox (08:00:27:2a:d9:5a) requested None
+05-05 23:44 INFO     [*] Got new DHCP ACKNOLEDGMENT from: 08:00:27:b6:e2:c5 xid: 0xfead2b96
+05-05 23:44 INFO     DHCP Server 192.168.94.2 (08:00:27:b6:e2:c5) offered 192.168.94.7
+05-05 23:44 INFO     DHCP Options: subnet_mask: 255.255.255.0, lease_time: 600, router: None, name_server: None, domain: None
+05-05 23:45 INFO     [*] Got new DHCP REQUEST from: 08:00:27:2a:d9:5a xid: 0x29ff0159
+05-05 23:45 INFO     Host ubuntu-VirtualBox (08:00:27:2a:d9:5a) requested None
+05-05 23:45 INFO     [*] Got new DHCP ACKNOLEDGMENT from: 08:00:27:b6:e2:c5 xid: 0x29ff0159
+05-05 23:45 INFO     DHCP Server 192.168.94.2 (08:00:27:b6:e2:c5) offered 192.168.94.5
+05-05 23:45 INFO     DHCP Options: subnet_mask: 255.255.255.0, lease_time: 600, router: None, name_server: None, domain: None
+05-05 23:48 INFO     [*] Got new DHCP REQUEST from: 08:00:27:94:cc:9b xid: 0xa9e4fc5a
+05-05 23:48 INFO     Host ubuntu-VirtualBox (08:00:27:94:cc:9b) requested None
+05-05 23:48 INFO     [*] Got new DHCP ACKNOLEDGMENT from: 08:00:27:b6:e2:c5 xid: 0xa9e4fc5a
+05-05 23:48 INFO     DHCP Server 192.168.94.2 (08:00:27:b6:e2:c5) offered 192.168.94.6
+05-05 23:48 INFO     DHCP Options: subnet_mask: 255.255.255.0, lease_time: 600, router: None, name_server: None, domain: None
+05-05 23:49 INFO     [*] Got new DHCP REQUEST from: 08:00:27:2a:d9:5a xid: 0x482bc533
+05-05 23:49 INFO     Host ubuntu-VirtualBox (08:00:27:2a:d9:5a) requested None
+05-05 23:49 INFO     [*] Got new DHCP ACKNOLEDGMENT from: 08:00:27:b6:e2:c5 xid: 0x482bc533
+05-05 23:49 INFO     DHCP Server 192.168.94.2 (08:00:27:b6:e2:c5) offered 192.168.94.5
+05-05 23:49 INFO     DHCP Options: subnet_mask: 255.255.255.0, lease_time: 600, router: None, name_server: None, domain: None
+05-05 23:49 INFO     [*] Got new DHCP REQUEST from: 08:00:27:2a:d9:5a xid: 0xc783424c
+05-05 23:49 INFO     Host ubuntu-VirtualBox (08:00:27:2a:d9:5a) requested None
+05-05 23:49 INFO     [*] Got new DHCP ACKNOLEDGMENT from: 08:00:27:b6:e2:c5 xid: 0xc783424c
+05-05 23:49 INFO     DHCP Server 192.168.94.2 (08:00:27:b6:e2:c5) offered 192.168.94.7
+05-05 23:49 INFO     DHCP Options: subnet_mask: 255.255.255.0, lease_time: 600, router: None, name_server: None, domain: None
+05-05 23:50 INFO     [*] Got new DHCP REQUEST from: 08:00:27:2a:d9:5a xid: 0x29ff0159
+05-05 23:50 INFO     Host ubuntu-VirtualBox (08:00:27:2a:d9:5a) requested None
+05-05 23:50 INFO     [*] Got new DHCP ACKNOLEDGMENT from: 08:00:27:b6:e2:c5 xid: 0x29ff0159
+05-05 23:50 INFO     DHCP Server 192.168.94.2 (08:00:27:b6:e2:c5) offered 192.168.94.5
+05-05 23:50 INFO     DHCP Options: subnet_mask: 255.255.255.0, lease_time: 600, router: None, name_server: None, domain: None
+05-05 23:53 INFO     [*] Got new DHCP REQUEST from: 08:00:27:2a:d9:5a xid: 0x482bc533
+05-05 23:53 INFO     Host ubuntu-VirtualBox (08:00:27:2a:d9:5a) requested None
+05-05 23:53 INFO     [*] Got new DHCP ACKNOLEDGMENT from: 08:00:27:b6:e2:c5 xid: 0x482bc533
+05-05 23:53 INFO     DHCP Server 192.168.94.2 (08:00:27:b6:e2:c5) offered 192.168.94.5
+05-05 23:53 INFO     DHCP Options: subnet_mask: 255.255.255.0, lease_time: 600, router: None, name_server: None, domain: None
+05-05 23:53 INFO     [*] Got new DHCP REQUEST from: 08:00:27:94:cc:9b xid: 0x2b2444eb
+05-05 23:53 INFO     Host ubuntu-VirtualBox (08:00:27:94:cc:9b) requested None
+05-05 23:53 INFO     [*] Got new DHCP ACKNOLEDGMENT from: 08:00:27:b6:e2:c5 xid: 0x2b2444eb
+05-05 23:53 INFO     DHCP Server 192.168.94.2 (08:00:27:b6:e2:c5) offered 192.168.94.6
+05-05 23:53 INFO     DHCP Options: subnet_mask: 255.255.255.0, lease_time: 600, router: None, name_server: None, domain: None
+05-05 23:54 INFO     [*] Got new DHCP REQUEST from: 08:00:27:2a:d9:5a xid: 0x29ff0159
+05-05 23:54 INFO     Host ubuntu-VirtualBox (08:00:27:2a:d9:5a) requested None
+05-05 23:54 INFO     [*] Got new DHCP ACKNOLEDGMENT from: 08:00:27:b6:e2:c5 xid: 0x29ff0159
+05-05 23:54 INFO     DHCP Server 192.168.94.2 (08:00:27:b6:e2:c5) offered 192.168.94.5
+05-05 23:54 INFO     DHCP Options: subnet_mask: 255.255.255.0, lease_time: 600, router: None, name_server: None, domain: None
+05-05 23:54 INFO     [*] Got new DHCP REQUEST from: 08:00:27:2a:d9:5a xid: 0xbd03db0f
+05-05 23:54 INFO     Host ubuntu-VirtualBox (08:00:27:2a:d9:5a) requested None
+05-05 23:54 INFO     [*] Got new DHCP ACKNOLEDGMENT from: 08:00:27:b6:e2:c5 xid: 0xbd03db0f
+05-05 23:54 INFO     DHCP Server 192.168.94.2 (08:00:27:b6:e2:c5) offered 192.168.94.7
+05-05 23:54 INFO     DHCP Options: subnet_mask: 255.255.255.0, lease_time: 600, router: None, name_server: None, domain: None
+05-05 23:57 INFO     [*] Got new DHCP REQUEST from: 08:00:27:2a:d9:5a xid: 0x482bc533
+05-05 23:57 INFO     Host ubuntu-VirtualBox (08:00:27:2a:d9:5a) requested None
+05-05 23:57 INFO     [*] Got new DHCP ACKNOLEDGMENT from: 08:00:27:b6:e2:c5 xid: 0x482bc533
+05-05 23:57 INFO     DHCP Server 192.168.94.2 (08:00:27:b6:e2:c5) offered 192.168.94.5
+05-05 23:57 INFO     DHCP Options: subnet_mask: 255.255.255.0, lease_time: 600, router: None, name_server: None, domain: None
+05-05 23:58 INFO     [*] Got new DHCP REQUEST from: 08:00:27:94:cc:9b xid: 0xeb8e5a46
+05-05 23:58 INFO     Host ubuntu-VirtualBox (08:00:27:94:cc:9b) requested None
+05-05 23:58 INFO     [*] Got new DHCP ACKNOLEDGMENT from: 08:00:27:b6:e2:c5 xid: 0xeb8e5a46
+05-05 23:58 INFO     DHCP Server 192.168.94.2 (08:00:27:b6:e2:c5) offered 192.168.94.6
+05-05 23:58 INFO     DHCP Options: subnet_mask: 255.255.255.0, lease_time: 600, router: None, name_server: None, domain: None
+05-05 23:58 INFO     [*] Got new DHCP REQUEST from: 08:00:27:2a:d9:5a xid: 0x29ff0159
+05-05 23:58 INFO     Host ubuntu-VirtualBox (08:00:27:2a:d9:5a) requested None
+05-05 23:58 INFO     [*] Got new DHCP ACKNOLEDGMENT from: 08:00:27:b6:e2:c5 xid: 0x29ff0159
+05-05 23:58 INFO     DHCP Server 192.168.94.2 (08:00:27:b6:e2:c5) offered 192.168.94.5
+05-05 23:58 INFO     DHCP Options: subnet_mask: 255.255.255.0, lease_time: 600, router: None, name_server: None, domain: None
+05-05 23:59 INFO     [*] Got new DHCP REQUEST from: 08:00:27:2a:d9:5a xid: 0x1aeb0693
+05-05 23:59 INFO     Host ubuntu-VirtualBox (08:00:27:2a:d9:5a) requested None
+05-05 23:59 INFO     [*] Got new DHCP ACKNOLEDGMENT from: 08:00:27:b6:e2:c5 xid: 0x1aeb0693
+05-05 23:59 INFO     DHCP Server 192.168.94.2 (08:00:27:b6:e2:c5) offered 192.168.94.7
+05-05 23:59 INFO     DHCP Options: subnet_mask: 255.255.255.0, lease_time: 600, router: None, name_server: None, domain: None
+05-06 00:01 INFO     [*] Got new DHCP REQUEST from: 08:00:27:2a:d9:5a xid: 0x482bc533
+05-06 00:01 INFO     Host ubuntu-VirtualBox (08:00:27:2a:d9:5a) requested None
+05-06 00:01 INFO     [*] Got new DHCP ACKNOLEDGMENT from: 08:00:27:b6:e2:c5 xid: 0x482bc533
+05-06 00:01 INFO     DHCP Server 192.168.94.2 (08:00:27:b6:e2:c5) offered 192.168.94.5
+05-06 00:01 INFO     DHCP Options: subnet_mask: 255.255.255.0, lease_time: 600, router: None, name_server: None, domain: None
+05-06 00:02 INFO     [*] Got new DHCP REQUEST from: 08:00:27:2a:d9:5a xid: 0x29ff0159
+05-06 00:02 INFO     Host ubuntu-VirtualBox (08:00:27:2a:d9:5a) requested None
+05-06 00:02 INFO     [*] Got new DHCP ACKNOLEDGMENT from: 08:00:27:b6:e2:c5 xid: 0x29ff0159
+05-06 00:02 INFO     DHCP Server 192.168.94.2 (08:00:27:b6:e2:c5) offered 192.168.94.5
+05-06 00:02 INFO     DHCP Options: subnet_mask: 255.255.255.0, lease_time: 600, router: None, name_server: None, domain: None
+05-06 00:03 INFO     [*] Got new DHCP REQUEST from: 08:00:27:94:cc:9b xid: 0x3f86b5b6
+05-06 00:03 INFO     Host ubuntu-VirtualBox (08:00:27:94:cc:9b) requested None
+05-06 00:03 INFO     [*] Got new DHCP ACKNOLEDGMENT from: 08:00:27:b6:e2:c5 xid: 0x3f86b5b6
+05-06 00:03 INFO     DHCP Server 192.168.94.2 (08:00:27:b6:e2:c5) offered 192.168.94.6
+05-06 00:03 INFO     DHCP Options: subnet_mask: 255.255.255.0, lease_time: 600, router: None, name_server: None, domain: None
+05-06 00:04 INFO     [*] Got new DHCP REQUEST from: 08:00:27:2a:d9:5a xid: 0x6a2fa32
+05-06 00:04 INFO     Host ubuntu-VirtualBox (08:00:27:2a:d9:5a) requested None
+05-06 00:04 INFO     [*] Got new DHCP ACKNOLEDGMENT from: 08:00:27:b6:e2:c5 xid: 0x6a2fa32
+05-06 00:04 INFO     DHCP Server 192.168.94.2 (08:00:27:b6:e2:c5) offered 192.168.94.7
+05-06 00:04 INFO     DHCP Options: subnet_mask: 255.255.255.0, lease_time: 600, router: None, name_server: None, domain: None
+05-06 00:05 INFO     [*] Got new DHCP REQUEST from: 08:00:27:2a:d9:5a xid: 0x482bc533
+05-06 00:05 INFO     Host ubuntu-VirtualBox (08:00:27:2a:d9:5a) requested None
+05-06 00:05 INFO     [*] Got new DHCP ACKNOLEDGMENT from: 08:00:27:b6:e2:c5 xid: 0x482bc533
+05-06 00:05 INFO     DHCP Server 192.168.94.2 (08:00:27:b6:e2:c5) offered 192.168.94.5
+05-06 00:05 INFO     DHCP Options: subnet_mask: 255.255.255.0, lease_time: 600, router: None, name_server: None, domain: None
+05-06 00:07 INFO     [*] Got new DHCP REQUEST from: 08:00:27:2a:d9:5a xid: 0x29ff0159
+05-06 00:07 INFO     Host ubuntu-VirtualBox (08:00:27:2a:d9:5a) requested None
+05-06 00:07 INFO     [*] Got new DHCP ACKNOLEDGMENT from: 08:00:27:b6:e2:c5 xid: 0x29ff0159
+05-06 00:07 INFO     DHCP Server 192.168.94.2 (08:00:27:b6:e2:c5) offered 192.168.94.5
+05-06 00:07 INFO     DHCP Options: subnet_mask: 255.255.255.0, lease_time: 600, router: None, name_server: None, domain: None
+05-06 00:08 INFO     [*] Got new DHCP REQUEST from: 08:00:27:94:cc:9b xid: 0x8214b89d
+05-06 00:08 INFO     Host ubuntu-VirtualBox (08:00:27:94:cc:9b) requested None
+05-06 00:08 INFO     [*] Got new DHCP ACKNOLEDGMENT from: 08:00:27:b6:e2:c5 xid: 0x8214b89d
+05-06 00:08 INFO     DHCP Server 192.168.94.2 (08:00:27:b6:e2:c5) offered 192.168.94.6
+05-06 00:08 INFO     DHCP Options: subnet_mask: 255.255.255.0, lease_time: 600, router: None, name_server: None, domain: None
+05-06 00:09 INFO     [*] Got new DHCP REQUEST from: 08:00:27:2a:d9:5a xid: 0x482bc533
+05-06 00:09 INFO     Host ubuntu-VirtualBox (08:00:27:2a:d9:5a) requested None
+05-06 00:09 INFO     [*] Got new DHCP ACKNOLEDGMENT from: 08:00:27:b6:e2:c5 xid: 0x482bc533
+05-06 00:09 INFO     DHCP Server 192.168.94.2 (08:00:27:b6:e2:c5) offered 192.168.94.5
+05-06 00:09 INFO     DHCP Options: subnet_mask: 255.255.255.0, lease_time: 600, router: None, name_server: None, domain: None
+05-06 00:09 INFO     [*] Got new DHCP REQUEST from: 08:00:27:2a:d9:5a xid: 0xb252053f
+05-06 00:09 INFO     Host ubuntu-VirtualBox (08:00:27:2a:d9:5a) requested None
+05-06 00:09 INFO     [*] Got new DHCP ACKNOLEDGMENT from: 08:00:27:b6:e2:c5 xid: 0xb252053f
+05-06 00:09 INFO     DHCP Server 192.168.94.2 (08:00:27:b6:e2:c5) offered 192.168.94.7
+05-06 00:09 INFO     DHCP Options: subnet_mask: 255.255.255.0, lease_time: 600, router: None, name_server: None, domain: None
+05-06 00:11 INFO     [*] Got new DHCP REQUEST from: 08:00:27:2a:d9:5a xid: 0x29ff0159
+05-06 00:11 INFO     Host ubuntu-VirtualBox (08:00:27:2a:d9:5a) requested None
+05-06 00:11 INFO     [*] Got new DHCP ACKNOLEDGMENT from: 08:00:27:b6:e2:c5 xid: 0x29ff0159
+05-06 00:11 INFO     DHCP Server 192.168.94.2 (08:00:27:b6:e2:c5) offered 192.168.94.5
+05-06 00:11 INFO     DHCP Options: subnet_mask: 255.255.255.0, lease_time: 600, router: None, name_server: None, domain: None
+05-06 00:13 INFO     [*] Got new DHCP REQUEST from: 08:00:27:94:cc:9b xid: 0x79258109
+05-06 00:13 INFO     Host ubuntu-VirtualBox (08:00:27:94:cc:9b) requested None
+05-06 00:13 INFO     [*] Got new DHCP ACKNOLEDGMENT from: 08:00:27:b6:e2:c5 xid: 0x79258109
+05-06 00:13 INFO     DHCP Server 192.168.94.2 (08:00:27:b6:e2:c5) offered 192.168.94.6
+05-06 00:13 INFO     DHCP Options: subnet_mask: 255.255.255.0, lease_time: 600, router: None, name_server: None, domain: None
+05-06 00:13 INFO     [*] Got new DHCP REQUEST from: 08:00:27:2a:d9:5a xid: 0x482bc533
+05-06 00:13 INFO     Host ubuntu-VirtualBox (08:00:27:2a:d9:5a) requested None
+05-06 00:13 INFO     [*] Got new DHCP ACKNOLEDGMENT from: 08:00:27:b6:e2:c5 xid: 0x482bc533
+05-06 00:13 INFO     DHCP Server 192.168.94.2 (08:00:27:b6:e2:c5) offered 192.168.94.5
+05-06 00:13 INFO     DHCP Options: subnet_mask: 255.255.255.0, lease_time: 600, router: None, name_server: None, domain: None
+05-06 00:14 INFO     [*] Got new DHCP REQUEST from: 08:00:27:2a:d9:5a xid: 0xfdabf561
+05-06 00:14 INFO     Host ubuntu-VirtualBox (08:00:27:2a:d9:5a) requested None
+05-06 00:14 INFO     [*] Got new DHCP ACKNOLEDGMENT from: 08:00:27:b6:e2:c5 xid: 0xfdabf561
+05-06 00:14 INFO     DHCP Server 192.168.94.2 (08:00:27:b6:e2:c5) offered 192.168.94.7
+05-06 00:14 INFO     DHCP Options: subnet_mask: 255.255.255.0, lease_time: 600, router: None, name_server: None, domain: None
+05-06 00:15 INFO     [*] Got new DHCP REQUEST from: 08:00:27:2a:d9:5a xid: 0x29ff0159
+05-06 00:15 INFO     Host ubuntu-VirtualBox (08:00:27:2a:d9:5a) requested None
+05-06 00:15 INFO     [*] Got new DHCP ACKNOLEDGMENT from: 08:00:27:b6:e2:c5 xid: 0x29ff0159
+05-06 00:15 INFO     DHCP Server 192.168.94.2 (08:00:27:b6:e2:c5) offered 192.168.94.5
+05-06 00:15 INFO     DHCP Options: subnet_mask: 255.255.255.0, lease_time: 600, router: None, name_server: None, domain: None
+05-06 00:17 INFO     [*] Got new DHCP REQUEST from: 08:00:27:2a:d9:5a xid: 0x482bc533
+05-06 00:17 INFO     Host ubuntu-VirtualBox (08:00:27:2a:d9:5a) requested None
+05-06 00:17 INFO     [*] Got new DHCP ACKNOLEDGMENT from: 08:00:27:b6:e2:c5 xid: 0x482bc533
+05-06 00:17 INFO     DHCP Server 192.168.94.2 (08:00:27:b6:e2:c5) offered 192.168.94.5
+05-06 00:17 INFO     DHCP Options: subnet_mask: 255.255.255.0, lease_time: 600, router: None, name_server: None, domain: None
+05-06 00:18 INFO     [*] Got new DHCP REQUEST from: 08:00:27:94:cc:9b xid: 0xf4e3c063
+05-06 00:18 INFO     Host ubuntu-VirtualBox (08:00:27:94:cc:9b) requested None
+05-06 00:18 INFO     [*] Got new DHCP ACKNOLEDGMENT from: 08:00:27:b6:e2:c5 xid: 0xf4e3c063
+05-06 00:18 INFO     DHCP Server 192.168.94.2 (08:00:27:b6:e2:c5) offered 192.168.94.6
+05-06 00:18 INFO     DHCP Options: subnet_mask: 255.255.255.0, lease_time: 600, router: None, name_server: None, domain: None
+05-06 00:19 INFO     [*] Got new DHCP REQUEST from: 08:00:27:2a:d9:5a xid: 0xfc05246d
+05-06 00:19 INFO     Host ubuntu-VirtualBox (08:00:27:2a:d9:5a) requested None
+05-06 00:19 INFO     [*] Got new DHCP ACKNOLEDGMENT from: 08:00:27:b6:e2:c5 xid: 0xfc05246d
+05-06 00:19 INFO     DHCP Server 192.168.94.2 (08:00:27:b6:e2:c5) offered 192.168.94.7
+05-06 00:19 INFO     DHCP Options: subnet_mask: 255.255.255.0, lease_time: 600, router: None, name_server: None, domain: None
+05-06 00:20 INFO     [*] Got new DHCP REQUEST from: 08:00:27:2a:d9:5a xid: 0x29ff0159
+05-06 00:20 INFO     Host ubuntu-VirtualBox (08:00:27:2a:d9:5a) requested None
+05-06 00:20 INFO     [*] Got new DHCP ACKNOLEDGMENT from: 08:00:27:b6:e2:c5 xid: 0x29ff0159
+05-06 00:20 INFO     DHCP Server 192.168.94.2 (08:00:27:b6:e2:c5) offered 192.168.94.5
+05-06 00:20 INFO     DHCP Options: subnet_mask: 255.255.255.0, lease_time: 600, router: None, name_server: None, domain: None
+05-06 00:22 INFO     [*] Got new DHCP REQUEST from: 08:00:27:2a:d9:5a xid: 0x482bc533
+05-06 00:22 INFO     Host ubuntu-VirtualBox (08:00:27:2a:d9:5a) requested None
+05-06 00:22 INFO     [*] Got new DHCP ACKNOLEDGMENT from: 08:00:27:b6:e2:c5 xid: 0x482bc533
+05-06 00:22 INFO     DHCP Server 192.168.94.2 (08:00:27:b6:e2:c5) offered 192.168.94.5
+05-06 00:22 INFO     DHCP Options: subnet_mask: 255.255.255.0, lease_time: 600, router: None, name_server: None, domain: None
+05-06 00:23 INFO     [*] Got new DHCP REQUEST from: 08:00:27:94:cc:9b xid: 0xd418d040
+05-06 00:23 INFO     Host ubuntu-VirtualBox (08:00:27:94:cc:9b) requested None
+05-06 00:23 INFO     [*] Got new DHCP ACKNOLEDGMENT from: 08:00:27:b6:e2:c5 xid: 0xd418d040
+05-06 00:23 INFO     DHCP Server 192.168.94.2 (08:00:27:b6:e2:c5) offered 192.168.94.6
+05-06 00:23 INFO     DHCP Options: subnet_mask: 255.255.255.0, lease_time: 600, router: None, name_server: None, domain: None
+05-06 00:24 INFO     [*] Got new DHCP REQUEST from: 08:00:27:2a:d9:5a xid: 0x18c98431
+05-06 00:24 INFO     Host ubuntu-VirtualBox (08:00:27:2a:d9:5a) requested None
+05-06 00:24 INFO     [*] Got new DHCP ACKNOLEDGMENT from: 08:00:27:b6:e2:c5 xid: 0x18c98431
+05-06 00:24 INFO     DHCP Server 192.168.94.2 (08:00:27:b6:e2:c5) offered 192.168.94.7
+05-06 00:24 INFO     DHCP Options: subnet_mask: 255.255.255.0, lease_time: 600, router: None, name_server: None, domain: None
+05-06 00:25 INFO     [*] Got new DHCP REQUEST from: 08:00:27:2a:d9:5a xid: 0x29ff0159
+05-06 00:25 INFO     Host ubuntu-VirtualBox (08:00:27:2a:d9:5a) requested None
+05-06 00:25 INFO     [*] Got new DHCP ACKNOLEDGMENT from: 08:00:27:b6:e2:c5 xid: 0x29ff0159
+05-06 00:25 INFO     DHCP Server 192.168.94.2 (08:00:27:b6:e2:c5) offered 192.168.94.5
+05-06 00:25 INFO     DHCP Options: subnet_mask: 255.255.255.0, lease_time: 600, router: None, name_server: None, domain: None
+05-06 00:27 INFO     [*] Got new DHCP REQUEST from: 08:00:27:2a:d9:5a xid: 0x482bc533
+05-06 00:27 INFO     Host ubuntu-VirtualBox (08:00:27:2a:d9:5a) requested None
+05-06 00:27 INFO     [*] Got new DHCP ACKNOLEDGMENT from: 08:00:27:b6:e2:c5 xid: 0x482bc533
+05-06 00:27 INFO     DHCP Server 192.168.94.2 (08:00:27:b6:e2:c5) offered 192.168.94.5
+05-06 00:27 INFO     DHCP Options: subnet_mask: 255.255.255.0, lease_time: 600, router: None, name_server: None, domain: None
+05-06 00:28 INFO     [*] Got new DHCP REQUEST from: 08:00:27:94:cc:9b xid: 0x1db5c8cd
+05-06 00:28 INFO     Host ubuntu-VirtualBox (08:00:27:94:cc:9b) requested None
+05-06 00:28 INFO     [*] Got new DHCP ACKNOLEDGMENT from: 08:00:27:b6:e2:c5 xid: 0x1db5c8cd
+05-06 00:28 INFO     DHCP Server 192.168.94.2 (08:00:27:b6:e2:c5) offered 192.168.94.6
+05-06 00:28 INFO     DHCP Options: subnet_mask: 255.255.255.0, lease_time: 600, router: None, name_server: None, domain: None
+05-06 00:29 INFO     [*] Got new DHCP REQUEST from: 08:00:27:2a:d9:5a xid: 0xa0cc1757
+05-06 00:29 INFO     Host ubuntu-VirtualBox (08:00:27:2a:d9:5a) requested None
+05-06 00:29 INFO     [*] Got new DHCP ACKNOLEDGMENT from: 08:00:27:b6:e2:c5 xid: 0xa0cc1757
+05-06 00:29 INFO     DHCP Server 192.168.94.2 (08:00:27:b6:e2:c5) offered 192.168.94.7
+05-06 00:29 INFO     DHCP Options: subnet_mask: 255.255.255.0, lease_time: 600, router: None, name_server: None, domain: None
+05-06 00:30 INFO     [*] Got new DHCP REQUEST from: 08:00:27:2a:d9:5a xid: 0x29ff0159
+05-06 00:30 INFO     Host ubuntu-VirtualBox (08:00:27:2a:d9:5a) requested None
+05-06 00:30 INFO     [*] Got new DHCP ACKNOLEDGMENT from: 08:00:27:b6:e2:c5 xid: 0x29ff0159
+05-06 00:30 INFO     DHCP Server 192.168.94.2 (08:00:27:b6:e2:c5) offered 192.168.94.5
+05-06 00:30 INFO     DHCP Options: subnet_mask: 255.255.255.0, lease_time: 600, router: None, name_server: None, domain: None
+05-06 00:32 INFO     [*] Got new DHCP REQUEST from: 08:00:27:2a:d9:5a xid: 0x482bc533
+05-06 00:32 INFO     Host ubuntu-VirtualBox (08:00:27:2a:d9:5a) requested None
+05-06 00:32 INFO     [*] Got new DHCP ACKNOLEDGMENT from: 08:00:27:b6:e2:c5 xid: 0x482bc533
+05-06 00:32 INFO     DHCP Server 192.168.94.2 (08:00:27:b6:e2:c5) offered 192.168.94.5
+05-06 00:32 INFO     DHCP Options: subnet_mask: 255.255.255.0, lease_time: 600, router: None, name_server: None, domain: None
+05-06 00:33 INFO     [*] Got new DHCP REQUEST from: 08:00:27:94:cc:9b xid: 0xc2dfa684
+05-06 00:33 INFO     Host ubuntu-VirtualBox (08:00:27:94:cc:9b) requested None
+05-06 00:33 INFO     [*] Got new DHCP ACKNOLEDGMENT from: 08:00:27:b6:e2:c5 xid: 0xc2dfa684
+05-06 00:33 INFO     DHCP Server 192.168.94.2 (08:00:27:b6:e2:c5) offered 192.168.94.6
+05-06 00:33 INFO     DHCP Options: subnet_mask: 255.255.255.0, lease_time: 600, router: None, name_server: None, domain: None
+05-06 00:34 INFO     [*] Got new DHCP REQUEST from: 08:00:27:2a:d9:5a xid: 0x2f0830b
+05-06 00:34 INFO     Host ubuntu-VirtualBox (08:00:27:2a:d9:5a) requested None
+05-06 00:34 INFO     [*] Got new DHCP ACKNOLEDGMENT from: 08:00:27:b6:e2:c5 xid: 0x2f0830b
+05-06 00:34 INFO     DHCP Server 192.168.94.2 (08:00:27:b6:e2:c5) offered 192.168.94.7
+05-06 00:34 INFO     DHCP Options: subnet_mask: 255.255.255.0, lease_time: 600, router: None, name_server: None, domain: None
+05-06 00:35 INFO     [*] Got new DHCP REQUEST from: 08:00:27:2a:d9:5a xid: 0x29ff0159
+05-06 00:35 INFO     Host ubuntu-VirtualBox (08:00:27:2a:d9:5a) requested None
+05-06 00:35 INFO     [*] Got new DHCP ACKNOLEDGMENT from: 08:00:27:b6:e2:c5 xid: 0x29ff0159
+05-06 00:35 INFO     DHCP Server 192.168.94.2 (08:00:27:b6:e2:c5) offered 192.168.94.5
+05-06 00:35 INFO     DHCP Options: subnet_mask: 255.255.255.0, lease_time: 600, router: None, name_server: None, domain: None
+05-06 00:37 INFO     [*] Got new DHCP REQUEST from: 08:00:27:2a:d9:5a xid: 0x482bc533
+05-06 00:37 INFO     Host ubuntu-VirtualBox (08:00:27:2a:d9:5a) requested None
+05-06 00:37 INFO     [*] Got new DHCP ACKNOLEDGMENT from: 08:00:27:b6:e2:c5 xid: 0x482bc533
+05-06 00:37 INFO     DHCP Server 192.168.94.2 (08:00:27:b6:e2:c5) offered 192.168.94.5
+05-06 00:37 INFO     DHCP Options: subnet_mask: 255.255.255.0, lease_time: 600, router: None, name_server: None, domain: None
+05-06 00:38 INFO     [*] Got new DHCP REQUEST from: 08:00:27:94:cc:9b xid: 0x43c1eddc
+05-06 00:38 INFO     Host ubuntu-VirtualBox (08:00:27:94:cc:9b) requested None
+05-06 00:38 INFO     [*] Got new DHCP ACKNOLEDGMENT from: 08:00:27:b6:e2:c5 xid: 0x43c1eddc
+05-06 00:38 INFO     DHCP Server 192.168.94.2 (08:00:27:b6:e2:c5) offered 192.168.94.6
+05-06 00:38 INFO     DHCP Options: subnet_mask: 255.255.255.0, lease_time: 600, router: None, name_server: None, domain: None
+05-06 00:39 INFO     [*] Got new DHCP REQUEST from: 08:00:27:2a:d9:5a xid: 0x60a81dc
+05-06 00:39 INFO     Host ubuntu-VirtualBox (08:00:27:2a:d9:5a) requested None
+05-06 00:39 INFO     [*] Got new DHCP ACKNOLEDGMENT from: 08:00:27:b6:e2:c5 xid: 0x60a81dc
+05-06 00:39 INFO     DHCP Server 192.168.94.2 (08:00:27:b6:e2:c5) offered 192.168.94.7
+05-06 00:39 INFO     DHCP Options: subnet_mask: 255.255.255.0, lease_time: 600, router: None, name_server: None, domain: None
+05-06 00:39 INFO     [*] Got new DHCP REQUEST from: 08:00:27:2a:d9:5a xid: 0x29ff0159
+05-06 00:39 INFO     Host ubuntu-VirtualBox (08:00:27:2a:d9:5a) requested None
+05-06 00:39 INFO     [*] Got new DHCP ACKNOLEDGMENT from: 08:00:27:b6:e2:c5 xid: 0x29ff0159
+05-06 00:39 INFO     DHCP Server 192.168.94.2 (08:00:27:b6:e2:c5) offered 192.168.94.5
+05-06 00:39 INFO     DHCP Options: subnet_mask: 255.255.255.0, lease_time: 600, router: None, name_server: None, domain: None
+05-06 00:41 INFO     [*] Got new DHCP REQUEST from: 08:00:27:2a:d9:5a xid: 0x482bc533
+05-06 00:41 INFO     Host ubuntu-VirtualBox (08:00:27:2a:d9:5a) requested None
+05-06 00:41 INFO     [*] Got new DHCP ACKNOLEDGMENT from: 08:00:27:b6:e2:c5 xid: 0x482bc533
+05-06 00:41 INFO     DHCP Server 192.168.94.2 (08:00:27:b6:e2:c5) offered 192.168.94.5
+05-06 00:41 INFO     DHCP Options: subnet_mask: 255.255.255.0, lease_time: 600, router: None, name_server: None, domain: None
+05-06 00:43 INFO     [*] Got new DHCP REQUEST from: 08:00:27:94:cc:9b xid: 0x602a9f04
+05-06 00:43 INFO     Host ubuntu-VirtualBox (08:00:27:94:cc:9b) requested None
+05-06 00:43 INFO     [*] Got new DHCP ACKNOLEDGMENT from: 08:00:27:b6:e2:c5 xid: 0x602a9f04
+05-06 00:43 INFO     DHCP Server 192.168.94.2 (08:00:27:b6:e2:c5) offered 192.168.94.6
+05-06 00:43 INFO     DHCP Options: subnet_mask: 255.255.255.0, lease_time: 600, router: None, name_server: None, domain: None
+05-06 00:43 INFO     [*] Got new DHCP REQUEST from: 08:00:27:2a:d9:5a xid: 0x29ff0159
+05-06 00:43 INFO     Host ubuntu-VirtualBox (08:00:27:2a:d9:5a) requested None
+05-06 00:43 INFO     [*] Got new DHCP ACKNOLEDGMENT from: 08:00:27:b6:e2:c5 xid: 0x29ff0159
+05-06 00:43 INFO     DHCP Server 192.168.94.2 (08:00:27:b6:e2:c5) offered 192.168.94.5
+05-06 00:43 INFO     DHCP Options: subnet_mask: 255.255.255.0, lease_time: 600, router: None, name_server: None, domain: None
+05-06 00:44 INFO     [*] Got new DHCP REQUEST from: 08:00:27:2a:d9:5a xid: 0xc17b9f30
+05-06 00:44 INFO     Host ubuntu-VirtualBox (08:00:27:2a:d9:5a) requested None
+05-06 00:44 INFO     [*] Got new DHCP ACKNOLEDGMENT from: 08:00:27:b6:e2:c5 xid: 0xc17b9f30
+05-06 00:44 INFO     DHCP Server 192.168.94.2 (08:00:27:b6:e2:c5) offered 192.168.94.7
+05-06 00:44 INFO     DHCP Options: subnet_mask: 255.255.255.0, lease_time: 600, router: None, name_server: None, domain: None
+05-06 00:45 INFO     [*] Got new DHCP REQUEST from: 08:00:27:2a:d9:5a xid: 0x482bc533
+05-06 00:45 INFO     Host ubuntu-VirtualBox (08:00:27:2a:d9:5a) requested None
+05-06 00:45 INFO     [*] Got new DHCP ACKNOLEDGMENT from: 08:00:27:b6:e2:c5 xid: 0x482bc533
+05-06 00:45 INFO     DHCP Server 192.168.94.2 (08:00:27:b6:e2:c5) offered 192.168.94.5
+05-06 00:45 INFO     DHCP Options: subnet_mask: 255.255.255.0, lease_time: 600, router: None, name_server: None, domain: None
+05-06 00:48 INFO     [*] Got new DHCP REQUEST from: 08:00:27:2a:d9:5a xid: 0x29ff0159
+05-06 00:48 INFO     Host ubuntu-VirtualBox (08:00:27:2a:d9:5a) requested None
+05-06 00:48 INFO     [*] Got new DHCP ACKNOLEDGMENT from: 08:00:27:b6:e2:c5 xid: 0x29ff0159
+05-06 00:48 INFO     DHCP Server 192.168.94.2 (08:00:27:b6:e2:c5) offered 192.168.94.5
+05-06 00:48 INFO     DHCP Options: subnet_mask: 255.255.255.0, lease_time: 600, router: None, name_server: None, domain: None
+05-06 00:48 INFO     [*] Got new DHCP REQUEST from: 08:00:27:94:cc:9b xid: 0x67e89d2b
+05-06 00:48 INFO     Host ubuntu-VirtualBox (08:00:27:94:cc:9b) requested None
+05-06 00:48 INFO     [*] Got new DHCP ACKNOLEDGMENT from: 08:00:27:b6:e2:c5 xid: 0x67e89d2b
+05-06 00:48 INFO     DHCP Server 192.168.94.2 (08:00:27:b6:e2:c5) offered 192.168.94.6
+05-06 00:48 INFO     DHCP Options: subnet_mask: 255.255.255.0, lease_time: 600, router: None, name_server: None, domain: None

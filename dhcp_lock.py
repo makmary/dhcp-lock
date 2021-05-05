@@ -1,14 +1,13 @@
 from scapy.all import *
 import json
 import logging
-import threading
+from threading import Thread
 
 #BOOTP
 #siaddr = DHCP server ip
 #yiaddr = ip offered to client
 #xid = transaction id 
 #chaddr = clients mac address in binary format
-
 
 DHCPTypes = {
 	"discover": 1,
@@ -28,12 +27,17 @@ DHCPTypes = {
 
 
 class DHCPLock:
-	def __init__(self, filename=None, interfaces=None):
+	def __init__(self, filename=None, interfaces=None, serverIP=None, serverMAC=None):
+		self.dhcplock_filter = 'udp and (port 67 or port 68)'
+		self.trusted_servers = []
+		self.clients = {}
+		self.rogue_servers = []
+		self.foundRogue = False
 		if filename is not None:
 			self.interfaces = self.read_file(filename)
-		if interfaces is not None:	
+		if interfaces is not None and serverIP is not None and serverMAC is not None:	
 			self.interfaces = interfaces
-		self.dhcplock_filter = 'udp and (port 67 or port 68)'
+			self.trusted_servers.append((ip, mac))
 		
 		
 	def read_file(self, filename):
@@ -41,6 +45,8 @@ class DHCPLock:
 		f = open(filename, 'r')
 		data = json.loads(f.read())
 		interfaces = data['configDetails']['interfaces']
+		ip, mac = data['configDetails']['servers'][0]['serverIP'], data['configDetails']['servers'][0]['serverMAC']
+		self.trusted_servers.append((ip, mac))
 		f.close()
 		return interfaces
 		
@@ -107,6 +113,8 @@ class DHCPLock:
 
 				logging.info(f"DHCP Server {resp[IP].src} ({mac_addr}) offered {resp[BOOTP].yiaddr}")
 				logging.info(f"DHCP Options: subnet_mask: {subnet_mask}, lease_time: {lease_time}, router: {router}, name_server: {name_server}, domain: {domain}")
+				logging.info(resp.show())
+				#check_for_rogue_server()
 
 			# ---- DHCP REQUEST ----
 			elif resp[DHCP].options[0][1] == DHCPTypes.get('request'):
@@ -141,9 +149,23 @@ class DHCPLock:
 				      
 			else:
 				print(f"I dont know this DHCP packet")
-				print(resp.show())	
+				print(resp.show())
+				
+				
+	def check_for_rogue_server(self, s_tuple):
+		if s_tuple not in self.trusted_servers:
+			return False
+		return True		
+				
+				
+	def start(self):
+		thread = Thread(target=self.run)
+		thread.start()
+		while self.foundRogue:
+			logging.info("[*] [*] Starting neutralizing method ...")
+			print('AAAAAAAAAAA')				
 		
 	def run(self):
 		logging.info("[*] Waiting for a DHCP Packets...")
-		sniff(iface=self.interfaces, filter=self.dhcplock_filter, prn=self.dhcp)	
+		sniff(iface=self.interfaces, filter=self.dhcplock_filter, prn=self.dhcp, store=0)	
 			
