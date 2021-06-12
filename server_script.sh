@@ -66,10 +66,10 @@ then
 	sudo ifconfig $interfacevar $serveripvar
 	sudo ifconfig $interfacevar up
 	echo "Starting daemon..."
-	systemstl start dnsmasq.service
+	systemctl start dnsmasq.service
 fi
 
 echo "All network interfaces:"
 ifconfig -a
 
-echo"		The end"
+echo "		The end"

@@ -5,12 +5,13 @@
 		"servers":[
 		{
 			"serverID": 1,
-			"serverIP": "192.168.94.2",
+			"serverIP": "192.168.94.5",
 			"serverMAC": "08:00:27:94:cc:9b",
 			"emailCount": 1,
-			"emailSender": "makmary05@gmail.com",
+			"emailSender": "dhcp.test.123@gmail.com",
 			"emailReceiver": "makmary05@gmail.com",
-			"emailPassword": "masha123",
+			"emailPassword": "dhcptest",
+			"emailDomain": "smtp.gmail.com",
 			"mailOn": true
 		}]
 	}

