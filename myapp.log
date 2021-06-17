@@ -1,17 +1,4 @@
-06-12 08:04 INFO     [*] Waiting for a DHCP Packets...
-06-12 08:04 INFO     [*] Got new DHCP REQUEST from: 08:00:27:8d:c9:de xid: 0xe638ef05
-06-12 08:04 INFO     Host ubuntu-VirtualBox (08:00:27:8d:c9:de) requested 192.168.94.53
-06-12 08:04 INFO     [*] Got new DHCP ACKNOLEDGMENT from: 08:00:27:bc:32:cf xid: 0xe638ef05
-06-12 08:04 INFO     DHCP Server 192.168.94.100 (08:00:27:bc:32:cf) offered 192.168.94.53
-06-12 08:04 INFO     DHCP Options: subnet_mask: 255.255.255.0, lease_time: 3600, router: 192.168.94.100, name_server: 192.168.94.100, domain: None
-06-12 08:04 WARNING  [***] POTENTIAL DHCP ROGUE SERVER FOUND [***]
-06-12 08:04 INFO     [*] Got new DHCP NACK from: 08:00:27:94:cc:9b xid: 0xe638ef05
-06-12 08:04 INFO     Host 192.168.94.52 (08:00:27:94:cc:9b) NACK
-06-12 08:06 INFO     [*] Got new DHCP REQUEST from: 08:00:27:8d:c9:de xid: 0x194f4a7f
-06-12 08:06 INFO     Host ubuntu-VirtualBox (08:00:27:8d:c9:de) requested 192.168.94.53
-06-12 08:06 INFO     [*] Got new DHCP ACKNOLEDGMENT from: 08:00:27:bc:32:cf xid: 0x194f4a7f
-06-12 08:06 INFO     DHCP Server 192.168.94.100 (08:00:27:bc:32:cf) offered 192.168.94.53
-06-12 08:06 INFO     DHCP Options: subnet_mask: 255.255.255.0, lease_time: 3600, router: 192.168.94.100, name_server: 192.168.94.100, domain: None
-06-12 08:06 WARNING  [***] POTENTIAL DHCP ROGUE SERVER FOUND [***]
-06-12 08:06 INFO     [*] Got new DHCP NACK from: 08:00:27:94:cc:9b xid: 0x194f4a7f
-06-12 08:06 INFO     Host 192.168.94.52 (08:00:27:94:cc:9b) NACK
+06-17 07:53 INFO     
+[*] [*] Starting neutralizing method2...
+
+06-17 07:53 INFO     [*] Waiting for a DHCP Packets...

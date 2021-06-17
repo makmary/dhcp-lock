@@ -6,7 +6,7 @@ Dhcp server and client with scapy and python
 # Usage
 
 ```
-main.py  [--iface network interface] [--file filename] 
+main.py [--file filename] 
 
 DHCPLock
 
@@ -16,10 +16,7 @@ optional arguments:
 File settings:
   -f FILE, --file FILE       
                      File with DHCP server settings
-  
-User settings:
-  -i FACE, --iface FACE
-                     Interface to use
+                     
                      
 Lock dem baby!                     
 ```

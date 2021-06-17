@@ -12,8 +12,6 @@ def main():
 	args = parse_args()
 	if args.file:
 		app = DHCPLock(filename=args.file)
-	else:	
-		app = DHCPLock(interfaces=args.iface)
 	app.start()
 
 

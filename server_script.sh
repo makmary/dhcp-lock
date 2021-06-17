@@ -43,6 +43,10 @@ then
 		echo "Installing scapy..."
 		pip3 install scapy
 		sudo apt-get install python3-scapy
+
+		#Install netaddr
+		echo "Installing netaddr..."
+		pip3 install netaddr
 	fi	
 fi	
 
@@ -61,7 +65,7 @@ read input
 if [ "$input" == "yes" ]
 then
 	read -p 'Interface for DHCP server: ' interfacevar
-	read -p 'IP address for DHCP server' serveripvar
+	read -p 'IP address for DHCP server: ' serveripvar
 
 	sudo ifconfig $interfacevar $serveripvar
 	sudo ifconfig $interfacevar up
